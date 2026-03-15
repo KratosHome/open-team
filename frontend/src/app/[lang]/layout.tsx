@@ -5,8 +5,10 @@ import { ReactNode } from 'react';
 
 import '../globals.css';
 
+import type { Locale } from '@/i18n-config';
+
 import { Navbar } from '@/components/navbar';
-import { i18n, type Locale } from '@/i18n-config';
+import { i18n } from '@/i18n-config';
 import { getDictionary } from '@/lib/get-dictionary';
 
 const inter = Inter({
@@ -83,7 +85,7 @@ export default async function RootLayout({
   return (
     <html lang={locale}>
       <body
-        className={`${inter.className} ${geistMono.variable} relative mx-auto max-w-[1440px] bg-slate-950 px-15 antialiased`}
+        className={`${inter.className} ${geistMono.variable} relative mx-auto max-w-[1440px] bg-slate-950 antialiased`}
       >
         <header>
           <Navbar dict={dict.navbar} lang={locale} />

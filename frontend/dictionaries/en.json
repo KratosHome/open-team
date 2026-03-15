@@ -26,14 +26,14 @@
     },
     "howItWorks": "How it works",
     "steps": {
-      "step1Title": "Propose an idea",
-      "step1Description": "Describe the project, set a token budget, and open recruitment for the team.",
-      "step2Title": "Or choose a project",
-      "step2Description": "Find an interesting project, apply, and get tasks immediately.",
-      "step3Title": "Complete tasks",
-      "step3Description": "Internal task manager. Close a task — tokens in your account.",
-      "step4Title": "Launch the product",
-      "step4Description": "20% of the profit from a successful project supports the token ecosystem."
+      "step1Title": "Propose an Idea",
+      "step1Description": "Describe your vision, set a token budget, and attract professionals to your team.",
+      "step2Title": "Launch the Product",
+      "step2Description": "Bring your idea to life, enter the market, and strengthen the OpenTeam ecosystem.",
+      "step3Title": "Complete Tasks",
+      "step3Description": "Join the team and make a real contribution to the development of innovative products.",
+      "step4Title": "Get Tokens",
+      "step4Description": "Every completed task brings you closer to success and earns you real OpenTeam tokens."
     }
   },
   "metadata": {

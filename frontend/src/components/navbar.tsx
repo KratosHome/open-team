@@ -44,11 +44,11 @@ export const Navbar = () => {
       </div>
 
       <div className="flex items-center gap-4">
-        <div className="glass flex items-center gap-2 rounded-lg px-3 py-1.5 text-sm">
+        <Button variant="outline">
           <span>🇺🇦 UA</span>
           <span className="h-2 w-2 rounded-full bg-yellow-400"></span>
-        </div>
-        <Button className="bg-brand-purple hover:bg-brand-purple/90 flex items-center gap-2 rounded-xl px-6 py-5 text-white">
+        </Button>
+        <Button>
           Вхід <MoveRight className="h-4 w-4" />
         </Button>
       </div>

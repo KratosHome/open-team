@@ -1,8 +1,8 @@
-import { TeamHubLanding } from "@/components/landing/TeamHubLanding";
+import { TeamHubLanding } from '@/components/landing/TeamHubLanding';
 
 export default function Home() {
   return (
-    <main className="dark">
+    <main>
       <TeamHubLanding />
     </main>
   );

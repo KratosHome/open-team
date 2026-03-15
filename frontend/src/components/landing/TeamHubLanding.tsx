@@ -1,31 +1,18 @@
-'use client';
-
-import Link from 'next/link';
+import React from 'react';
 import {
-  Coins,
-  FileBox,
-  FileText,
-  HelpCircle,
-  LayoutGrid,
   Lightbulb,
   MoveRight,
-  Radio,
   Rocket,
   Search,
-  Settings,
-  Users,
   Zap,
 } from 'lucide-react';
-import React from 'react';
 
 import { Button } from '@/components/ui/button';
 
 const StatCard = ({
-  label,
   value,
   sublabel,
 }: {
-  label: string;
   value: string;
   sublabel: string;
 }) => (
@@ -43,13 +30,13 @@ const StepCard = ({
   color,
 }: {
   number: string;
-  icon: any;
+  icon: React.ElementType;
   title: string;
   description: string;
   color: string;
 }) => (
   <div
-    className={`glass group relative overflow-hidden rounded-3xl border-t-2 p-8 transition-all duration-300 hover:bg-white/10`}
+    className="glass group relative overflow-hidden rounded-3xl border-t-2 p-8 transition-all duration-300 hover:bg-white/10"
     style={{ borderTopColor: color }}
   >
     <div className="absolute top-4 left-4 font-mono text-xs text-white/20">{number}</div>
@@ -100,9 +87,9 @@ export const TeamHubLanding = () => {
           </div>
 
           <div className="mt-8 flex flex-wrap gap-4">
-            <StatCard value="4" label="Проєкти" sublabel="Проєктів" />
-            <StatCard value="5" label="Учасники" sublabel="Учасників" />
-            <StatCard value="89%" label="Успішність" sublabel="Успішність" />
+            <StatCard value="4" sublabel="Проєктів" />
+            <StatCard value="5" sublabel="Учасників" />
+            <StatCard value="89%" sublabel="Успішність" />
           </div>
         </div>
 

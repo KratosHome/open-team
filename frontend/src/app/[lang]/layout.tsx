@@ -3,9 +3,11 @@ import type { Metadata } from 'next';
 import { Geist_Mono, Inter } from 'next/font/google';
 import { ReactNode } from 'react';
 
-import './globals.css';
+import '../globals.css';
 
 import { Navbar } from '@/components/navbar';
+import { i18n, type Locale } from '@/i18n-config';
+import { getDictionary } from '@/lib/get-dictionary';
 
 const inter = Inter({
   subsets: ['latin', 'cyrillic'],
@@ -17,24 +19,34 @@ const geistMono = Geist_Mono({
   variable: '--font-geist-mono',
 });
 
+export async function generateStaticParams() {
+  return i18n.locales.map((locale) => ({ lang: locale }));
+}
+
 export const metadata: Metadata = {
   title: 'TeamHub — Твоя ідея, наша команда',
   description:
     'Платформа, де ідеї стають продуктами. Збирай команду, виконуй задачі та отримуй токени.',
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
-}: Readonly<{
+  params,
+}: {
   children: ReactNode;
-}>) {
+  params: Promise<{ lang: string }>;
+}) {
+  const { lang } = await params;
+  const locale = lang as Locale;
+  const dict = await getDictionary(locale);
+
   return (
-    <html lang="uk">
+    <html lang={locale}>
       <body
         className={`${inter.className} ${geistMono.variable} relative mx-auto max-w-[1440px] bg-slate-950 px-15 antialiased`}
       >
         <header>
-          <Navbar />
+          <Navbar dict={dict.navbar} lang={locale} />
         </header>
         <main>{children}</main>
         <footer>footer</footer>

@@ -58,7 +58,36 @@ const StepCard = ({
   </div>
 );
 
-export const TeamHubLanding = () => {
+export const TeamHubLanding = ({
+  dict,
+}: {
+  dict: {
+    activeProjects: string;
+    participants: string;
+    heroTitle: string;
+    heroSubtitle1: string;
+    heroSubtitle2: string;
+    heroDescription: string;
+    createProject: string;
+    selectProject: string;
+    stats: {
+      projects: string;
+      participants: string;
+      success: string;
+    };
+    howItWorks: string;
+    steps: {
+      step1Title: string;
+      step1Description: string;
+      step2Title: string;
+      step2Description: string;
+      step3Title: string;
+      step3Description: string;
+      step4Title: string;
+      step4Description: string;
+    };
+  };
+}) => {
   return (
     <div className="mx-auto min-h-screen max-w-[1440px] overflow-hidden px-4 pt-24 pb-20 md:px-20">
       <main className="grid grid-cols-1 items-center gap-16 lg:grid-cols-2">
@@ -70,36 +99,35 @@ export const TeamHubLanding = () => {
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75"></span>
                 <span className="relative inline-flex rounded-full h-2 w-2 bg-cyan-500"></span>
               </span>
-              <span>4 активних проєктів</span>
+              <span>{dict.activeProjects.replace('{count}', '4')}</span>
             </div>
             <span className="text-white/20">•</span>
-            <span>5 учасників</span>
+            <span>{dict.participants.replace('{count}', '5')}</span>
           </div>
 
           <h1 className="font-sans text-6xl leading-[1] font-bold tracking-tight md:text-8xl">
-            Твоя ідея —<br />
-            <span className="text-gradient-cyan">команда, задачі,</span><br />
-            <span className="bg-gradient-to-r from-purple-500 to-indigo-500 bg-clip-text text-transparent">токени.</span>
+            {dict.heroTitle}<br />
+            <span className="text-gradient-cyan">{dict.heroSubtitle1}</span><br />
+            <span className="bg-gradient-to-r from-purple-500 to-indigo-500 bg-clip-text text-transparent">{dict.heroSubtitle2}</span>
           </h1>
 
           <p className="max-w-lg text-lg leading-relaxed text-white/40">
-            Платформа де ідеї стають продуктами. <br />
-            Збирай команду, виконуй задачі — отримуй токени.
+            {dict.heroDescription}
           </p>
 
           <div className="flex flex-wrap gap-4">
             <Button className="h-16 px-8 rounded-2xl bg-[#00e99f] hover:bg-[#00e99f]/90 text-black text-lg font-bold flex items-center gap-2 group transition-all hover:scale-[1.02]">
-              Створити проєкт <MoveRight className="h-5 w-5 group-hover:translate-x-1 transition-transform" />
+              {dict.createProject} <MoveRight className="h-5 w-5 group-hover:translate-x-1 transition-transform" />
             </Button>
             <Button className="h-16 px-8 rounded-2xl bg-[#6d48ff] hover:bg-[#6d48ff]/90 text-white text-lg font-bold flex items-center gap-2 group transition-all hover:scale-[1.02]">
-              Обрати проєкт <MoveRight className="h-5 w-5 group-hover:translate-x-1 transition-transform" />
+              {dict.selectProject} <MoveRight className="h-5 w-5 group-hover:translate-x-1 transition-transform" />
             </Button>
           </div>
 
           <div className="mt-8 flex flex-wrap gap-4">
-            <StatCard value="4" sublabel="Проєктів" />
-            <StatCard value="5" sublabel="Учасників" />
-            <StatCard value="89%" sublabel="Успішність" />
+            <StatCard value="4" sublabel={dict.stats.projects} />
+            <StatCard value="5" sublabel={dict.stats.participants} />
+            <StatCard value="89%" sublabel={dict.stats.success} />
           </div>
         </div>
 
@@ -107,7 +135,7 @@ export const TeamHubLanding = () => {
         <div className="relative flex flex-col gap-6 pt-4">
           <div className="flex justify-start md:justify-end">
             <div className="text-[#00ffa2] text-[10px] font-bold tracking-[0.2em] uppercase bg-[#00ffa2]/10 px-3 py-1 rounded-md">
-              Як це працює
+              {dict.howItWorks}
             </div>
           </div>
 
@@ -115,8 +143,8 @@ export const TeamHubLanding = () => {
             <StepCard
               number="01"
               icon={Lightbulb}
-              title="Запропонуй ідею"
-              description="Опиши проєкт, встанови бюджет токенів і відкрий набір у команду."
+              title={dict.steps.step1Title}
+              description={dict.steps.step1Description}
               color="#00e1ff"
             />
             
@@ -127,16 +155,16 @@ export const TeamHubLanding = () => {
             <StepCard
               number="02"
               icon={Search}
-              title="Або обери проєкт"
-              description="Знайди цікавий проєкт, подай заявку і отримай задачі одразу."
+              title={dict.steps.step2Title}
+              description={dict.steps.step2Description}
               color="#8146ff"
             />
 
             <StepCard
               number="03"
               icon={Zap}
-              title="Виконуй задачі"
-              description="Таск-менеджер всередині. Закрив задачу — токени на рахунку."
+              title={dict.steps.step3Title}
+              description={dict.steps.step3Description}
               color="#00ff62"
             />
 
@@ -147,8 +175,8 @@ export const TeamHubLanding = () => {
             <StepCard
               number="04"
               icon={Rocket}
-              title="Запускай продукт"
-              description="20% від прибутку успішного проєкту підтримує екосистему токена."
+              title={dict.steps.step4Title}
+              description={dict.steps.step4Description}
               color="#ffbc00"
             />
           </div>

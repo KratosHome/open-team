@@ -1,0 +1,39 @@
+{
+  "navbar": {
+    "projects": "Проєкти",
+    "community": "Ком'юніті",
+    "blog": "Блог",
+    "rules": "Правила",
+    "faq": "FAQ",
+    "documentation": "Документація",
+    "tokenomics": "Токеноміка",
+    "login": "Вхід",
+    "language": "UA"
+  },
+  "landing": {
+    "activeProjects": "{count} активних проєктів",
+    "participants": "{count} учасників",
+    "heroTitle": "Твоя ідея —",
+    "heroSubtitle1": "команда, задачі,",
+    "heroSubtitle2": "токени.",
+    "heroDescription": "Платформа де ідеї стають продуктами. Збирай команду, виконуй задачі — отримуй токени.",
+    "createProject": "Створити проєкт",
+    "selectProject": "Обрати проєкт",
+    "stats": {
+      "projects": "Проєктів",
+      "participants": "Учасників",
+      "success": "Успішність"
+    },
+    "howItWorks": "Як це працює",
+    "steps": {
+      "step1Title": "Запропонуй ідею",
+      "step1Description": "Опиши проєкт, встанови бюджет токенів і відкрий набір у команду.",
+      "step2Title": "Або обери проєкт",
+      "step2Description": "Знайди цікавий проєкт, подай заявку і отримай задачі одразу.",
+      "step3Title": "Виконуй задачі",
+      "step3Description": "Таск-менеджер всередині. Закрив задачу — токени на рахунку.",
+      "step4Title": "Запускай продукт",
+      "step4Description": "20% від прибутку успішного проєкту підтримує екосистему токена."
+    }
+  }
+}

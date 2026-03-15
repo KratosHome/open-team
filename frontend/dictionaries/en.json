@@ -1,0 +1,39 @@
+{
+  "navbar": {
+    "projects": "Projects",
+    "community": "Community",
+    "blog": "Blog",
+    "rules": "Rules",
+    "faq": "FAQ",
+    "documentation": "Documentation",
+    "tokenomics": "Tokenomics",
+    "login": "Login",
+    "language": "EN"
+  },
+  "landing": {
+    "activeProjects": "{count} active projects",
+    "participants": "{count} participants",
+    "heroTitle": "Your idea —",
+    "heroSubtitle1": "team, tasks,",
+    "heroSubtitle2": "tokens.",
+    "heroDescription": "A platform where ideas become products. Build a team, complete tasks — get tokens.",
+    "createProject": "Create Project",
+    "selectProject": "Select Project",
+    "stats": {
+      "projects": "Projects",
+      "participants": "Participants",
+      "success": "Success Rate"
+    },
+    "howItWorks": "How it works",
+    "steps": {
+      "step1Title": "Propose an idea",
+      "step1Description": "Describe the project, set a token budget, and open recruitment for the team.",
+      "step2Title": "Or choose a project",
+      "step2Description": "Find an interesting project, apply, and get tasks immediately.",
+      "step3Title": "Complete tasks",
+      "step3Description": "Internal task manager. Close a task — tokens in your account.",
+      "step4Title": "Launch the product",
+      "step4Description": "20% of the profit from a successful project supports the token ecosystem."
+    }
+  }
+}

@@ -116,12 +116,21 @@
   --sidebar-ring: oklch(0.556 0 0);
 }
 
+@layer utilities {
+  .text-gradient-cyan {
+    @apply bg-gradient-to-r from-cyan-400 to-emerald-400 bg-clip-text text-transparent;
+  }
+  .glass {
+    @apply border border-white/10 bg-[#161922]/60 backdrop-blur-xl shadow-[0_8px_32px_0_rgba(0,0,0,0.3)];
+  }
+}
+
 @layer base {
   * {
     @apply border-border outline-ring/50;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply bg-[#0c0e14] text-slate-50 antialiased;
   }
   html {
     @apply font-sans;

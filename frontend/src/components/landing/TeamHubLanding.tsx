@@ -16,9 +16,9 @@ const StatCard = ({
   value: string;
   sublabel: string;
 }) => (
-  <div className="glass flex min-w-[140px] flex-col gap-1 rounded-2xl p-6">
-    <span className="text-3xl font-bold">{value}</span>
-    <span className="text-xs tracking-wider text-white/40 uppercase">{sublabel}</span>
+  <div className="glass flex flex-col gap-1 rounded-2xl px-8 py-6 min-w-[130px]">
+    <span className="text-4xl font-bold">{value}</span>
+    <span className="text-sm text-white/40">{sublabel}</span>
   </div>
 );
 
@@ -36,19 +36,25 @@ const StepCard = ({
   color: string;
 }) => (
   <div
-    className="glass group relative overflow-hidden rounded-3xl border-t-2 p-8 transition-all duration-300 hover:bg-white/10"
+    className="glass group relative flex flex-col items-start gap-4 rounded-[32px] border-t-2 p-8 transition-all duration-300 hover:bg-white/5"
     style={{ borderTopColor: color }}
   >
-    <div className="absolute top-4 left-4 font-mono text-xs text-white/20">{number}</div>
-    <div className="mt-2 mb-6">
-      <Icon className="h-10 w-10" style={{ color }} />
+    <div 
+      className="inline-flex items-center justify-center rounded-lg px-3 py-1 text-xs font-bold"
+      style={{ backgroundColor: `${color}15`, color }}
+    >
+      {number}
     </div>
-    <h3 className="mb-3 text-xl font-bold">{title}</h3>
-    <p className="text-sm leading-relaxed text-white/40">{description}</p>
-    <div
-      className="absolute top-0 right-0 -mt-16 -mr-16 h-32 w-32 rounded-full bg-current opacity-[0.03] blur-3xl transition-opacity group-hover:opacity-[0.08]"
-      style={{ color }}
-    />
+    
+    <div className="flex flex-col items-start gap-4">
+      <div className="flex h-14 w-14 items-center justify-center rounded-2xl">
+        <Icon className="h-10 w-10" style={{ color }} />
+      </div>
+      <div className="flex flex-col gap-2">
+        <h3 className="text-xl font-bold text-white">{title}</h3>
+        <p className="text-sm leading-relaxed text-white/40">{description}</p>
+      </div>
+    </div>
   </div>
 );
 
@@ -58,16 +64,22 @@ export const TeamHubLanding = () => {
       <main className="grid grid-cols-1 items-center gap-16 lg:grid-cols-2">
         {/* Left Column */}
         <div className="flex flex-col gap-10">
-          <div className="glass inline-flex w-fit items-center gap-2 rounded-full px-4 py-2 text-xs text-white/60">
-            <span className="bg-brand-green h-1.5 w-1.5 animate-pulse rounded-full"></span>4
-            активних проєктів • 5 учасників
+          <div className="inline-flex w-fit items-center gap-3 rounded-2xl bg-[#1e2230]/50 px-4 py-2 text-xs font-medium text-white/60 backdrop-blur-sm border border-white/5">
+            <div className="flex items-center gap-1.5">
+               <span className="relative flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-cyan-500"></span>
+              </span>
+              <span>4 активних проєктів</span>
+            </div>
+            <span className="text-white/20">•</span>
+            <span>5 учасників</span>
           </div>
 
-          <h1 className="font-sans text-6xl leading-[1.1] font-bold tracking-tight md:text-7xl">
-            Твоя ідея —<span className="text-gradient-green block">команда, задачі,</span>
-            <span className="text-gradient-purple decoration-brand-purple/30 block underline underline-offset-8">
-              токени.
-            </span>
+          <h1 className="font-sans text-6xl leading-[1] font-bold tracking-tight md:text-8xl">
+            Твоя ідея —<br />
+            <span className="text-gradient-cyan">команда, задачі,</span><br />
+            <span className="bg-gradient-to-r from-purple-500 to-indigo-500 bg-clip-text text-transparent">токени.</span>
           </h1>
 
           <p className="max-w-lg text-lg leading-relaxed text-white/40">
@@ -76,13 +88,11 @@ export const TeamHubLanding = () => {
           </p>
 
           <div className="flex flex-wrap gap-4">
-            <Button className="bg-brand-green hover:bg-brand-green/90 text-brand-dark group flex items-center gap-2 rounded-2xl px-8 py-7 text-lg font-bold transition-transform hover:scale-105 active:scale-95">
-              Створити проєкт{' '}
-              <MoveRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
+            <Button className="h-16 px-8 rounded-2xl bg-[#00e99f] hover:bg-[#00e99f]/90 text-black text-lg font-bold flex items-center gap-2 group transition-all hover:scale-[1.02]">
+              Створити проєкт <MoveRight className="h-5 w-5 group-hover:translate-x-1 transition-transform" />
             </Button>
-            <Button className="bg-brand-purple/20 border-brand-purple/30 hover:bg-brand-purple/30 group flex items-center gap-2 rounded-2xl border px-8 py-7 text-lg font-bold text-white transition-transform hover:scale-105 active:scale-95">
-              Обрати проєкт{' '}
-              <MoveRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
+            <Button className="h-16 px-8 rounded-2xl bg-[#6d48ff] hover:bg-[#6d48ff]/90 text-white text-lg font-bold flex items-center gap-2 group transition-all hover:scale-[1.02]">
+              Обрати проєкт <MoveRight className="h-5 w-5 group-hover:translate-x-1 transition-transform" />
             </Button>
           </div>
 
@@ -94,48 +104,57 @@ export const TeamHubLanding = () => {
         </div>
 
         {/* Right Column */}
-        <div className="relative">
-          <div className="text-brand-green absolute -top-10 right-0 mb-4 text-[10px] font-bold tracking-widest uppercase">
-            Як це працює
+        <div className="relative flex flex-col gap-6 pt-4">
+          <div className="flex justify-start md:justify-end">
+            <div className="text-[#00ffa2] text-[10px] font-bold tracking-[0.2em] uppercase bg-[#00ffa2]/10 px-3 py-1 rounded-md">
+              Як це працює
+            </div>
           </div>
 
-          <div className="relative z-10 grid grid-cols-1 gap-6 md:grid-cols-2">
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-2 relative">
             <StepCard
               number="01"
               icon={Lightbulb}
               title="Запропонуй ідею"
               description="Опиши проєкт, встанови бюджет токенів і відкрий набір у команду."
-              color="#5eead4"
+              color="#00e1ff"
             />
+            
+            <div className="hidden md:flex absolute top-1/4 left-[calc(50%-12px)] z-10 text-white/20">
+              <MoveRight className="h-6 w-6" />
+            </div>
+
             <StepCard
               number="02"
               icon={Search}
               title="Або обери проєкт"
               description="Знайди цікавий проєкт, подай заявку і отримай задачі одразу."
-              color="#a855f7"
+              color="#8146ff"
             />
+
             <StepCard
               number="03"
               icon={Zap}
               title="Виконуй задачі"
               description="Таск-менеджер всередині. Закрив задачу — токени на рахунку."
-              color="#fbbf24"
+              color="#00ff62"
             />
+
+            <div className="hidden md:flex absolute bottom-1/4 left-[calc(50%-12px)] z-10 text-white/20">
+              <MoveRight className="h-6 w-6" />
+            </div>
+
             <StepCard
               number="04"
               icon={Rocket}
               title="Запускай продукт"
               description="20% від прибутку успішного проєкту підтримує екосистему токена."
-              color="#ef4444"
+              color="#ffbc00"
             />
-
-            {/* Connecting arrows effect (subtle) */}
-            <div className="absolute top-1/2 right-0 left-0 z-0 hidden h-px -translate-y-1/2 bg-white/5 md:block"></div>
-            <div className="absolute top-0 bottom-0 left-1/2 z-0 hidden w-px -translate-x-1/2 bg-white/5 md:block"></div>
           </div>
 
           {/* Background Glow */}
-          <div className="bg-brand-purple/10 absolute top-1/2 left-1/2 -z-10 h-[120%] w-[120%] -translate-x-1/2 -translate-y-1/2 rounded-full blur-[120px]" />
+          <div className="absolute top-1/2 left-1/2 -z-10 h-[100%] w-[100%] -translate-x-1/2 -translate-y-1/2 rounded-full bg-purple-500/10 blur-[120px]" />
         </div>
       </main>
     </div>

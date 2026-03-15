@@ -6,6 +6,8 @@ import './globals.css';
 
 import { ReactNode } from 'react';
 
+import { Navbar } from '@/components/navbar';
+
 const geistSans = Geist({
   variable: '--font-geist-sans',
   subsets: ['latin'],
@@ -29,7 +31,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable} bg-slate-950 antialiased`}>
-        {children}
+        <header>
+          <Navbar />
+        </header>
+        <main>{children}</main>
+        <footer>footer</footer>
       </body>
     </html>
   );

@@ -9,6 +9,8 @@ import {
 
 import { Button } from '@/components/ui/button';
 
+import { LandingStats } from '@/data/landing-stats';
+
 const StatCard = ({
   value,
   sublabel,
@@ -60,6 +62,7 @@ const StepCard = ({
 
 export const TeamHubLanding = ({
   dict,
+  stats,
 }: {
   dict: {
     activeProjects: string;
@@ -87,6 +90,7 @@ export const TeamHubLanding = ({
       step4Description: string;
     };
   };
+  stats: LandingStats;
 }) => {
   return (
     <div className="mx-auto min-h-screen max-w-[1440px] overflow-hidden px-4 pt-24 pb-20 md:px-20">
@@ -99,10 +103,10 @@ export const TeamHubLanding = ({
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75"></span>
                 <span className="relative inline-flex rounded-full h-2 w-2 bg-cyan-500"></span>
               </span>
-              <span>{dict.activeProjects.replace('{count}', '4')}</span>
+              <span>{dict.activeProjects.replace('{count}', stats.activeProjects.toString())}</span>
             </div>
             <span className="text-white/20">•</span>
-            <span>{dict.participants.replace('{count}', '5')}</span>
+            <span>{dict.participants.replace('{count}', stats.participants.toString())}</span>
           </div>
 
           <h1 className="font-sans text-6xl leading-[1] font-bold tracking-tight md:text-8xl">
@@ -125,9 +129,9 @@ export const TeamHubLanding = ({
           </div>
 
           <div className="mt-8 flex flex-wrap gap-4">
-            <StatCard value="4" sublabel={dict.stats.projects} />
-            <StatCard value="5" sublabel={dict.stats.participants} />
-            <StatCard value="89%" sublabel={dict.stats.success} />
+            <StatCard value={stats.activeProjects.toString()} sublabel={dict.stats.projects} />
+            <StatCard value={stats.participants.toString()} sublabel={dict.stats.participants} />
+            <StatCard value={`${stats.successRate}%`} sublabel={dict.stats.success} />
           </div>
         </div>
 

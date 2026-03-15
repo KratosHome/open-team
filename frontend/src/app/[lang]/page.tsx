@@ -1,6 +1,7 @@
 import { TeamHubLanding } from '@/components/landing/TeamHubLanding';
 import { getDictionary } from '@/lib/get-dictionary';
 import { Locale } from '@/i18n-config';
+import { mockLandingStats } from '@/data/landing-stats';
 
 export default async function Home({
   params,
@@ -13,7 +14,7 @@ export default async function Home({
 
   return (
     <main>
-      <TeamHubLanding dict={dict.landing} />
+      <TeamHubLanding dict={dict.landing} stats={mockLandingStats} />
     </main>
   );
 }

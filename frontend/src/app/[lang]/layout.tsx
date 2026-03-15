@@ -23,11 +23,38 @@ export async function generateStaticParams() {
   return i18n.locales.map((locale) => ({ lang: locale }));
 }
 
-export const metadata: Metadata = {
-  title: 'TeamHub — Твоя ідея, наша команда',
-  description:
-    'Платформа, де ідеї стають продуктами. Збирай команду, виконуй задачі та отримуй токени.',
-};
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ lang: string }>;
+}): Promise<Metadata> {
+  const { lang } = await params;
+  const locale = lang as Locale;
+  const dict = await getDictionary(locale);
+
+  return {
+    title: dict.metadata.title,
+    description: dict.metadata.description,
+    alternates: {
+      canonical: `/${locale}`,
+      languages: {
+        en: '/en',
+        uk: '/uk',
+      },
+    },
+    openGraph: {
+      title: dict.metadata.title,
+      description: dict.metadata.description,
+      type: 'website',
+      locale: locale === 'uk' ? 'uk_UA' : 'en_US',
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: dict.metadata.title,
+      description: dict.metadata.description,
+    },
+  };
+}
 
 export default async function RootLayout({
   children,

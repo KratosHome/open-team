@@ -134,9 +134,9 @@ export const TeamHubLanding = ({
         {/* Right Column */}
         <div className="relative flex flex-col gap-6 pt-4">
           <div className="flex justify-start md:justify-end">
-            <div className="text-[#00ffa2] text-[10px] font-bold tracking-[0.2em] uppercase bg-[#00ffa2]/10 px-3 py-1 rounded-md">
+            <h2 className="text-[#00ffa2] text-[10px] font-bold tracking-[0.2em] uppercase bg-[#00ffa2]/10 px-3 py-1 rounded-md">
               {dict.howItWorks}
-            </div>
+            </h2>
           </div>
 
           <div className="grid grid-cols-1 gap-6 md:grid-cols-2 relative">

@@ -1,9 +1,10 @@
-import Link from 'next/link';
-import { MoveRight } from 'lucide-react';
 import React from 'react';
+import { MoveRight } from 'lucide-react';
+import Link from 'next/link';
 
 import { Logo } from '@/components/ui/logo';
 import { Button } from '@/components/ui/button';
+import { MyLink } from '@/components/ui/my-link';
 
 export const Navbar = () => {
   return (
@@ -13,31 +14,28 @@ export const Navbar = () => {
           <Logo />
         </Link>
 
-        <div className="hidden items-center gap-8 text-sm font-medium text-white/60 md:flex">
-          <Link
-            href="#"
-            className="border-brand-green mt-1 border-b-2 pb-1 text-white transition-colors"
-          >
+        <div className="hidden items-center gap-8 text-sm font-medium md:flex">
+          <MyLink href="#" variant="navbar-active">
             Проєкти
-          </Link>
-          <Link href="#" className="transition-colors hover:text-white">
+          </MyLink>
+          <MyLink href="#" variant="navbar">
             Ком'юніті
-          </Link>
-          <Link href="#" className="transition-colors hover:text-white">
+          </MyLink>
+          <MyLink href="#" variant="navbar">
             Блог
-          </Link>
-          <Link href="#" className="transition-colors hover:text-white">
+          </MyLink>
+          <MyLink href="#" variant="navbar">
             Правила
-          </Link>
-          <Link href="#" className="transition-colors hover:text-white">
+          </MyLink>
+          <MyLink href="#" variant="navbar">
             FAQ
-          </Link>
-          <Link href="#" className="transition-colors hover:text-white">
+          </MyLink>
+          <MyLink href="#" variant="navbar">
             Документація
-          </Link>
-          <Link href="#" className="transition-colors hover:text-white">
+          </MyLink>
+          <MyLink href="#" variant="navbar">
             Токеноміка
-          </Link>
+          </MyLink>
         </div>
 
         <div className="flex items-center gap-4">

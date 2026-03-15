@@ -1,4 +1,4 @@
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
 
 import { Geist_Mono, Inter } from 'next/font/google';
 import { ReactNode } from 'react';
@@ -19,6 +19,13 @@ const geistMono = Geist_Mono({
   variable: '--font-geist-mono',
 });
 
+export const viewport: Viewport = {
+  themeColor: '#020617',
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 5,
+};
+
 export async function generateStaticParams() {
   return i18n.locales.map((locale) => ({ lang: locale }));
 }
@@ -35,6 +42,12 @@ export async function generateMetadata({
   return {
     title: dict.metadata.title,
     description: dict.metadata.description,
+    keywords: dict.metadata.keywords,
+    manifest: '/manifest.json',
+    icons: {
+      icon: '/favicon.ico',
+      apple: '/apple-touch-icon.png',
+    },
     alternates: {
       canonical: `/${locale}`,
       languages: {

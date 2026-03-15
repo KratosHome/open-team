@@ -1,84 +1,12 @@
-import { Coins, Lightbulb, MoveRight, Rocket, Search, Zap } from 'lucide-react';
+import { Coins, Lightbulb, MoveRight, Rocket, Zap } from 'lucide-react';
 import React from 'react';
 
 import { Button } from '@/components/ui/button';
-import { LandingStats } from '@/data/landing-stats';
+import { HeroSectionProps } from '@/types/hero';
+import { StatCard } from './StatCard';
+import { StepCard } from './StepCard';
 
-const StatCard = ({ value, sublabel }: { value: string; sublabel: string }) => (
-  <div className="glass flex min-w-[130px] flex-col gap-1 rounded-2xl px-8 py-6">
-    <span className="text-4xl font-bold">{value}</span>
-    <span className="text-sm text-white/40">{sublabel}</span>
-  </div>
-);
-
-const StepCard = ({
-  number,
-  icon: Icon,
-  title,
-  description,
-  color,
-}: {
-  number: string;
-  icon: React.ElementType;
-  title: string;
-  description: string;
-  color: string;
-}) => (
-  <div
-    className="glass group relative flex flex-col items-start gap-4 rounded-[32px] border-t-2 p-8 transition-all duration-300 hover:bg-white/5"
-    style={{ borderTopColor: color }}
-  >
-    <div
-      className="inline-flex items-center justify-center rounded-lg px-3 py-1 text-xs font-bold"
-      style={{ backgroundColor: `${color}15`, color }}
-    >
-      {number}
-    </div>
-
-    <div className="flex flex-col items-start gap-4">
-      <div className="flex h-14 w-14 items-center justify-center rounded-2xl">
-        <Icon className="h-10 w-10" style={{ color }} />
-      </div>
-      <div className="flex flex-col gap-2">
-        <h3 className="text-xl font-bold text-white">{title}</h3>
-        <p className="text-sm leading-relaxed text-white/40">{description}</p>
-      </div>
-    </div>
-  </div>
-);
-
-export const TeamHubLanding = ({
-  dict,
-  stats,
-}: {
-  dict: {
-    activeProjects: string;
-    participants: string;
-    heroTitle: string;
-    heroSubtitle1: string;
-    heroSubtitle2: string;
-    heroDescription: string;
-    createProject: string;
-    selectProject: string;
-    stats: {
-      projects: string;
-      participants: string;
-      success: string;
-    };
-    howItWorks: string;
-    steps: {
-      step1Title: string;
-      step1Description: string;
-      step2Title: string;
-      step2Description: string;
-      step3Title: string;
-      step3Description: string;
-      step4Title: string;
-      step4Description: string;
-    };
-  };
-  stats: LandingStats;
-}) => {
+export const HeroSection = ({ dict, stats }: HeroSectionProps) => {
   return (
     <div className="pt-24 pb-20">
       <main className="grid grid-cols-1 items-center gap-16 lg:grid-cols-2">
@@ -122,7 +50,7 @@ export const TeamHubLanding = ({
           <div className="mt-8 flex flex-wrap gap-4">
             <StatCard value={stats.activeProjects.toString()} sublabel={dict.stats.projects} />
             <StatCard value={stats.participants.toString()} sublabel={dict.stats.participants} />
-            <StatCard value={`${stats.successRate}%`} sublabel={dict.stats.success} />
+            <StatCard value={`${stats.successRate}%`} sublabel={dict.stats.completed} />
           </div>
         </div>
 

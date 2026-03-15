@@ -1,16 +1,5 @@
 {
-  "navbar": {
-    "projects": "Projects",
-    "community": "Community",
-    "blog": "Blog",
-    "rules": "Rules",
-    "faq": "FAQ",
-    "documentation": "Documentation",
-    "tokenomics": "Tokenomics",
-    "login": "Login",
-    "language": "EN"
-  },
-  "landing": {
+  "hero": {
     "activeProjects": "{count} active projects",
     "participants": "{count} participants",
     "heroTitle": "Your idea —",
@@ -22,7 +11,7 @@
     "stats": {
       "projects": "Projects",
       "participants": "Participants",
-      "success": "Success Rate"
+      "completed": "Completed"
     },
     "howItWorks": "How it works",
     "steps": {

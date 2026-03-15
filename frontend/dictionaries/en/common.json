@@ -1,0 +1,13 @@
+{
+  "navbar": {
+    "projects": "Projects",
+    "community": "Community",
+    "blog": "Blog",
+    "rules": "Rules",
+    "faq": "FAQ",
+    "documentation": "Documentation",
+    "tokenomics": "Tokenomics",
+    "login": "Login",
+    "language": "EN"
+  }
+}

@@ -1,16 +1,5 @@
 {
-  "navbar": {
-    "projects": "Проєкти",
-    "community": "Ком'юніті",
-    "blog": "Блог",
-    "rules": "Правила",
-    "faq": "FAQ",
-    "documentation": "Документація",
-    "tokenomics": "Токеноміка",
-    "login": "Вхід",
-    "language": "UA"
-  },
-  "landing": {
+  "hero": {
     "activeProjects": "{count} активних проєктів",
     "participants": "{count} учасників",
     "heroTitle": "Твоя ідея —",
@@ -22,7 +11,7 @@
     "stats": {
       "projects": "Проєктів",
       "participants": "Учасників",
-      "success": "Успішність"
+      "completed": "Завершені"
     },
     "howItWorks": "Як це працює",
     "steps": {

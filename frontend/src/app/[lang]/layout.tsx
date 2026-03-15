@@ -39,7 +39,7 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { lang } = await params;
   const locale = lang as Locale;
-  const dict = await getDictionary(locale);
+  const dict = await getDictionary(locale, 'main');
 
   return {
     title: dict.metadata.title,
@@ -80,7 +80,7 @@ export default async function RootLayout({
 }) {
   const { lang } = await params;
   const locale = lang as Locale;
-  const dict = await getDictionary(locale);
+  const dict = await getDictionary(locale, 'common');
 
   return (
     <html lang={locale}>

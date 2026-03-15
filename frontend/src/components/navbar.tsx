@@ -1,5 +1,7 @@
-import React from 'react';
-import { MoveRight } from 'lucide-react';
+'use client';
+
+import React, { useState } from 'react';
+import { Menu, MoveRight, X } from 'lucide-react';
 import Link from 'next/link';
 
 import { Logo } from '@/components/ui/logo';
@@ -7,6 +9,9 @@ import { Button } from '@/components/ui/button';
 import { MyLink } from '@/components/ui/my-link';
 import { LanguageSwitcher } from '@/components/language-switcher';
 import { Locale } from '@/i18n-config';
+import { getNavigationLinks } from '@/config/navigation';
+import { cn } from '@/lib/utils';
+import { BurgerButton } from '@/components/ui/burger-button';
 
 interface NavbarProps {
   dict: {
@@ -24,42 +29,71 @@ interface NavbarProps {
 }
 
 export const Navbar = ({ dict, lang }: NavbarProps) => {
+  const [isOpen, setIsOpen] = useState(false);
+  const links = getNavigationLinks(lang);
+
   return (
     <nav className="fixed top-0 right-0 left-0 z-50 border-b border-white/5 bg-[#171724]/80 backdrop-blur-md">
       <div className="mx-auto flex max-w-[1440px] items-center justify-between px-8 py-4">
-        <Link href={`/${lang}`} className="transition-opacity hover:opacity-90">
+        <Link 
+          href={`/${lang}`} 
+          className="transition-opacity hover:opacity-90"
+          onClick={() => setIsOpen(false)}
+        >
           <Logo />
         </Link>
 
-        <div className="hidden items-center gap-8 text-sm font-medium md:flex">
-          <MyLink href={`/${lang}/projects`} variant="navbar-active">
-            {dict.projects}
-          </MyLink>
-          <MyLink href={`/${lang}/community`} variant="navbar">
-            {dict.community}
-          </MyLink>
-          <MyLink href={`/${lang}/blog`} variant="navbar">
-            {dict.blog}
-          </MyLink>
-          <MyLink href={`/${lang}/rules`} variant="navbar">
-            {dict.rules}
-          </MyLink>
-          <MyLink href={`/${lang}/faq`} variant="navbar">
-            {dict.faq}
-          </MyLink>
-          <MyLink href={`/${lang}/docs`} variant="navbar">
-            {dict.documentation}
-          </MyLink>
-          <MyLink href={`/${lang}/tokenomics`} variant="navbar">
-            {dict.tokenomics}
-          </MyLink>
+        {/* Desktop Menu */}
+        <div className="hidden items-center gap-8 text-sm font-medium lg:flex">
+          {links.map((link) => (
+            <MyLink 
+              key={link.href} 
+              href={link.href} 
+              variant={link.href === `/${lang}/projects` ? 'navbar-active' : 'navbar'}
+            >
+              {dict[link.labelKey as keyof typeof dict]}
+            </MyLink>
+          ))}
         </div>
 
         <div className="flex items-center gap-4">
-          <LanguageSwitcher lang={lang} />
-          <Button>
+          <div className="hidden sm:block">
+            <LanguageSwitcher lang={lang} />
+          </div>
+          <Button className="flex">
             {dict.login} <MoveRight className="h-4 w-4" />
           </Button>
+
+          {/* Burger Button */}
+          <BurgerButton 
+            isOpen={isOpen} 
+            onClick={() => setIsOpen(!isOpen)} 
+            className="lg:hidden"
+          />
+        </div>
+      </div>
+
+      {/* Mobile Menu */}
+      <div 
+        className={cn(
+          "absolute top-full left-0 right-0 border-t border-white/5 bg-[#171724] p-4 transition-all duration-300 ease-in-out lg:hidden",
+          isOpen ? "translate-y-0 opacity-100 visible" : "-translate-y-4 opacity-0 invisible"
+        )}
+      >
+        <div className="flex flex-col gap-4">
+          {links.map((link) => (
+            <MyLink
+              key={link.href}
+              href={link.href}
+              variant={link.href === `/${lang}/projects` ? 'navbar-active' : 'navbar'}
+              onClick={() => setIsOpen(false)}
+            >
+              {dict[link.labelKey as keyof typeof dict]}
+            </MyLink>
+          ))}
+          <div className="mt-4 flex flex-col gap-4 border-t border-white/5 pt-4 sm:hidden">
+            <LanguageSwitcher lang={lang} />
+          </div>
         </div>
       </div>
     </nav>

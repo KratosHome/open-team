@@ -9,7 +9,7 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
   const dict = await getDictionary(locale, 'main');
 
   return (
-    <main className="px-5 md:px-8">
+    <main className="mx-auto max-w-[1440px] px-5 md:px-8">
       <HeroSection dict={dict.hero} stats={mockLandingStats} />
     </main>
   );

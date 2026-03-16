@@ -9,5 +9,30 @@
     "tokenomics": "Tokenomics",
     "login": "Login",
     "language": "EN"
+  },
+  "auth": {
+    "login": "Login",
+    "register": "Register",
+    "welcomeBack": "Welcome Back",
+    "loginSubtitle": "Log in to your account to continue",
+    "createAccount": "Create Account",
+    "registerSubtitle": "Join our community today",
+    "forgotPassword": "Reset Password",
+    "forgotPasswordSubtitle": "Enter your email to receive instructions",
+    "backToLogin": "Back to login",
+    "emailLabel": "Email",
+    "passwordLabel": "Password",
+    "nameLabel": "Name",
+    "namePlaceholder": "Your name",
+    "submitLogin": "Login",
+    "submitRegister": "Register",
+    "submitForgot": "Send Instructions",
+    "forgotPasswordLink": "Forgot password?",
+    "footerText": "OpenTeam © 2026 • Future Platform",
+    "validation": {
+      "invalidEmail": "Invalid email",
+      "passwordTooShort": "Password must be at least 6 characters",
+      "nameTooShort": "Name is too short"
+    }
   }
 }

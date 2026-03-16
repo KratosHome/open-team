@@ -15,17 +15,7 @@ import { Locale } from '@/i18n-config';
 import { cn } from '@/lib/utils';
 
 interface NavbarProps {
-  dict: {
-    projects: string;
-    community: string;
-    blog: string;
-    rules: string;
-    faq: string;
-    documentation: string;
-    tokenomics: string;
-    login: string;
-    language: string;
-  };
+  dict: any; // Using any for simplicity as it grows
   lang: Locale;
 }
 
@@ -61,13 +51,13 @@ export const Navbar = ({ dict, lang }: NavbarProps) => {
             <LanguageSwitcher lang={lang} />
           </div>
           <AuthDialog
+            dict={dict}
             trigger={
               <Button>
-                {dict.login} <MoveRight className="h-4 w-4" />
+                {dict.navbar.login} <MoveRight className="h-4 w-4" />
               </Button>
             }
           />
-
           <BurgerButton isOpen={isOpen} onClick={() => setIsOpen(!isOpen)} className="lg:hidden" />
         </div>
       </div>

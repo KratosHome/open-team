@@ -22,7 +22,9 @@ const buttonVariants = cva(
           'bg-destructive/10 text-destructive hover:bg-destructive/20 focus-visible:border-destructive/40 focus-visible:ring-destructive/20 dark:bg-destructive/20 dark:hover:bg-destructive/30 dark:focus-visible:ring-destructive/40',
         link: 'text-primary underline-offset-4 hover:underline',
         success: 'bg-[#00e99f] text-black hover:bg-[#00e99f]/90 hover:scale-[1.02]',
+        gradient: 'bg-gradient-to-r from-cyan-500 to-emerald-500 text-white hover:opacity-90',
       },
+
       size: {
         default:
           'h-10 gap-1.5 rounded-lg px-2.5 text-sm has-data-[icon=inline-end]:pr-2 has-data-[icon=inline-start]:pl-2',

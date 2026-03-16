@@ -9,5 +9,30 @@
     "tokenomics": "Токеноміка",
     "login": "Вхід",
     "language": "UA"
+  },
+  "auth": {
+    "login": "Логін",
+    "register": "Реєстрація",
+    "welcomeBack": "З поверненням",
+    "loginSubtitle": "Увійдіть у свій акаунт, щоб продовжити",
+    "createAccount": "Створити акаунт",
+    "registerSubtitle": "Приєднуйтесь до нашої спільноти сьогодні",
+    "forgotPassword": "Відновлення паролю",
+    "forgotPasswordSubtitle": "Введіть ваш email, щоб отримати інструкції",
+    "backToLogin": "Назад до логіну",
+    "emailLabel": "Email",
+    "passwordLabel": "Пароль",
+    "nameLabel": "Ім'я",
+    "namePlaceholder": "Ваше ім'я",
+    "submitLogin": "Увійти",
+    "submitRegister": "Зареєструватися",
+    "submitForgot": "Надіслати інструкції",
+    "forgotPasswordLink": "Забули пароль?",
+    "footerText": "OpenTeam © 2026 • Платформа майбутнього",
+    "validation": {
+      "invalidEmail": "Некоректний email",
+      "passwordTooShort": "Пароль має бути не менше 6 символів",
+      "nameTooShort": "Ім'я занадто коротке"
+    }
   }
 }

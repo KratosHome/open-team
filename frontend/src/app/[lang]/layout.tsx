@@ -85,10 +85,10 @@ export default async function RootLayout({
   return (
     <html lang={locale}>
       <body
-        className={`${inter.className} ${geistMono.variable} relative mx-auto max-w-[1440px] bg-slate-950 antialiased`}
+        className={`${inter.className} ${geistMono.variable} relative bg-slate-950 antialiased`}
       >
         <header>
-          <Navbar dict={dict.navbar} lang={locale} />
+          <Navbar dict={dict} lang={locale} />
         </header>
         <main>{children}</main>
         <footer>footer</footer>

@@ -7,6 +7,6 @@ export default function robots(): MetadataRoute.Robots {
       allow: '/',
       disallow: '/api/',
     },
-    sitemap: 'https://openteam.hub/sitemap.xml', // Replace with actual domain if known
+    sitemap: 'https://openteam.hub/sitemap.xml',
   };
 }

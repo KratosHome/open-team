@@ -41,7 +41,7 @@ export const Navbar = ({ dict, lang }: NavbarProps) => {
               href={link.href}
               variant={link.href === `/${lang}/projects` ? 'navbar-active' : 'navbar'}
             >
-              {dict[link.labelKey as keyof typeof dict]}
+              {dict.navbar[link.labelKey as keyof typeof dict.navbar]}
             </MyLink>
           ))}
         </div>
@@ -76,7 +76,7 @@ export const Navbar = ({ dict, lang }: NavbarProps) => {
               variant={link.href === `/${lang}/projects` ? 'navbar-active' : 'navbar'}
               onClick={() => setIsOpen(false)}
             >
-              {dict[link.labelKey as keyof typeof dict]}
+              {dict.navbar[link.labelKey as keyof typeof dict.navbar]}
             </MyLink>
           ))}
           <div className="mt-4 flex flex-col gap-4 border-t border-white/5 pt-4 sm:hidden">

@@ -62,7 +62,7 @@ export const Navbar = ({ dict, lang }: NavbarProps) => {
           </div>
           <AuthDialog
             trigger={
-              <Button className="flex items-center gap-2">
+              <Button>
                 {dict.login} <MoveRight className="h-4 w-4" />
               </Button>
             }

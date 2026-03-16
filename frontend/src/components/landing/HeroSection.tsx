@@ -37,11 +37,12 @@ export const HeroSection = ({ dict, stats }: HeroSectionProps) => {
           <p className="max-w-lg text-lg leading-relaxed text-white/40">{dict.heroDescription}</p>
 
           <div className="flex flex-wrap gap-4">
-            <Button className="group flex h-16 items-center gap-2 rounded-2xl bg-[#00e99f] px-8 text-lg font-bold text-black transition-all hover:scale-[1.02] hover:bg-[#00e99f]/90">
-              {dict.createProject}{' '}
-              <MoveRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
+            <Button variant="success" size="xl">
+              {dict.createProject}
+              <MoveRight className="transition-transform group-hover/button:translate-x-1" />
             </Button>
-            <Button className="group flex h-16 items-center gap-2 rounded-2xl bg-[#6d48ff] px-8 text-lg font-bold text-white transition-all hover:scale-[1.02] hover:bg-[#6d48ff]/90">
+
+            <Button size="xl">
               {dict.selectProject}{' '}
               <MoveRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
             </Button>
@@ -103,7 +104,6 @@ export const HeroSection = ({ dict, stats }: HeroSectionProps) => {
             />
           </div>
 
-          {/* Background Glow */}
           <div className="absolute top-1/2 left-1/2 -z-10 h-[100%] w-[100%] -translate-x-1/2 -translate-y-1/2 rounded-full bg-purple-500/10 blur-[120px]" />
         </div>
       </main>

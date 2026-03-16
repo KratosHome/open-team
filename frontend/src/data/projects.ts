@@ -29,7 +29,6 @@ export interface Project {
   stats: {
     daysLeft: number;
     openRoles: number;
-    hoursPerWeek: number;
   };
   team: ProjectTeamMember[];
   accentColor: string;
@@ -41,7 +40,8 @@ export const mockProjects: Project[] = [
     title: 'EcoTrack',
     status: 'Активний',
     tags: ['Соціальний', 'Mobile App', 'Некомерційний'],
-    description: 'Щоденне відстеження екологічного впливу — вуглецевий слід, споживання ресурсів та заохочення сталих звичок через гейміфікацію.',
+    description:
+      'Щоденне відстеження екологічного впливу — вуглецевий слід, споживання ресурсів та заохочення сталих звичок через гейміфікацію.',
     techStack: ['React Native', 'Node.js'],
     seekingRoles: [
       { title: 'Frontend Dev', rate: 15000 },
@@ -59,7 +59,6 @@ export const mockProjects: Project[] = [
     stats: {
       daysLeft: 12,
       openRoles: 2,
-      hoursPerWeek: 5,
     },
     team: [
       { id: '1', initials: 'ОК', color: 'bg-blue-500' },
@@ -73,7 +72,8 @@ export const mockProjects: Project[] = [
     title: 'MindMap AI',
     status: 'Активний',
     tags: ['AI Tool', 'EdTech', 'SaaS'],
-    description: 'AI автоматично будує ментальні карти з будь-якого тексту: лекцій, нотаток, статей — допомагає засвоювати знання набагато швидше.',
+    description:
+      'AI автоматично будує ментальні карти з будь-якого тексту: лекцій, нотаток, статей — допомагає засвоювати знання набагато швидше.',
     techStack: ['Python', 'OpenAI', 'React'],
     seekingRoles: [
       { title: 'ML Engineer', rate: 32000 },
@@ -91,7 +91,6 @@ export const mockProjects: Project[] = [
     stats: {
       daysLeft: 8,
       openRoles: 2,
-      hoursPerWeek: 8,
     },
     team: [
       { id: '4', initials: 'АМ', color: 'bg-blue-600' },
@@ -104,7 +103,8 @@ export const mockProjects: Project[] = [
     title: 'FarmLink',
     status: 'Активний',
     tags: ['AgriTech', 'Marketplace', 'Соціальний'],
-    description: "Прямий зв'язок між фермерами та покупцями — без посередників і переплат. Свіжі продукти від виробника до твого столу.",
+    description:
+      "Прямий зв'язок між фермерами та покупцями — без посередників і переплат. Свіжі продукти від виробника до твого столу.",
     techStack: ['Next.js', 'Node.js', 'MongoDB'],
     seekingRoles: [
       { title: 'Backend Dev', rate: 20000 },
@@ -122,7 +122,6 @@ export const mockProjects: Project[] = [
     stats: {
       daysLeft: 21,
       openRoles: 3,
-      hoursPerWeek: 6,
     },
     team: [
       { id: '6', initials: 'РК', color: 'bg-blue-400' },

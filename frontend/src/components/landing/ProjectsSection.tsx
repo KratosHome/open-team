@@ -1,21 +1,39 @@
-'use client';
+import { Zap } from 'lucide-react';
+
+import { Button } from '@/components/ui/button';
+import { mockProjects } from '@/data/projects';
 
 import { ProjectCard } from './ProjectCard';
-import { mockProjects } from '@/data/projects';
 
 export function ProjectsSection() {
   return (
-    <section className="py-24 space-y-12">
-      <div className="space-y-4 text-center">
-        <h2 className="text-4xl md:text-5xl font-bold text-white tracking-tight">
-          Активні Проєкти
-        </h2>
-        <p className="text-slate-400 max-w-2xl mx-auto">
-          Обирай проєкт до душі, приєднуйся до команди та роби реальний внесок — отримуй токени за кожне виконане завдання.
-        </p>
+    <section className="space-y-8 py-16 md:space-y-10 md:py-24">
+      <div className="flex flex-col gap-4 sm:gap-5 md:flex-row md:items-start md:justify-between">
+        <div className="flex items-start gap-3">
+          <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#1D4ED8]">
+            <Zap className="h-5 w-5 text-white" />
+          </div>
+
+          <div className="min-w-0">
+            <h2 className="text-2xl font-semibold tracking-tight text-white sm:text-3xl md:text-4xl">
+              Активні проєкти
+            </h2>
+
+            <p className="mt-1 max-w-[560px] text-sm leading-5 text-slate-400 sm:text-base">
+              Приєднуйся до команд які шукають професіоналів прямо зараз
+            </p>
+          </div>
+        </div>
+
+        <Button
+          variant="outline"
+          className="w-full border-[#3D3D57] bg-[#212133] text-white hover:border-[#4A4A6A] hover:bg-[#2A2A44] sm:w-fit"
+        >
+          Всі проєкти →
+        </Button>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
         {mockProjects.map((project) => (
           <ProjectCard key={project.id} project={project} />
         ))}

@@ -1,15 +1,16 @@
 'use client';
 
+import { usePathname, useRouter } from 'next/navigation';
 import * as React from 'react';
-import { useRouter, usePathname } from 'next/navigation';
+
+import { Button } from '@/components/ui/button';
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import { Button } from '@/components/ui/button';
-import { Locale, i18n } from '@/i18n-config';
+import { i18n, Locale } from '@/i18n-config';
 
 export function LanguageSwitcher({ lang }: { lang: Locale }) {
   const router = useRouter();
@@ -32,9 +33,11 @@ export function LanguageSwitcher({ lang }: { lang: Locale }) {
         render={<Button variant="outline" className="flex items-center gap-2" />}
       >
         <span>{lang === 'uk' ? '🇺🇦 UA' : '🇺🇸 EN'}</span>
-        <span className={`h-2 w-2 rounded-full ${lang === 'uk' ? 'bg-yellow-400' : 'bg-blue-400'}`}></span>
+        <span
+          className={`h-2 w-2 rounded-full ${lang === 'uk' ? 'bg-yellow-400' : 'bg-blue-400'}`}
+        ></span>
       </DropdownMenuTrigger>
-      <DropdownMenuContent align="end" className="bg-[#171724] border-white/10 text-white">
+      <DropdownMenuContent align="end" className="border-white/10 bg-[#171724] text-white">
         {i18n.locales.map((locale) => (
           <DropdownMenuItem
             key={locale}

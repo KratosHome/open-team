@@ -1,18 +1,18 @@
 'use client';
 
-import React, { useState } from 'react';
-import { Menu, MoveRight, X } from 'lucide-react';
 import Link from 'next/link';
+import { Menu, MoveRight, X } from 'lucide-react';
+import React, { useState } from 'react';
 
-import { Logo } from '@/components/ui/logo';
-import { Button } from '@/components/ui/button';
-import { MyLink } from '@/components/ui/my-link';
-import { LanguageSwitcher } from '@/components/language-switcher';
-import { Locale } from '@/i18n-config';
-import { getNavigationLinks } from '@/config/navigation';
-import { cn } from '@/lib/utils';
-import { BurgerButton } from '@/components/ui/burger-button';
 import { AuthDialog } from '@/components/auth/auth-dialog';
+import { LanguageSwitcher } from '@/components/language-switcher';
+import { BurgerButton } from '@/components/ui/burger-button';
+import { Button } from '@/components/ui/button';
+import { Logo } from '@/components/ui/logo';
+import { MyLink } from '@/components/ui/my-link';
+import { getNavigationLinks } from '@/config/navigation';
+import { Locale } from '@/i18n-config';
+import { cn } from '@/lib/utils';
 
 interface NavbarProps {
   dict: {
@@ -36,20 +36,19 @@ export const Navbar = ({ dict, lang }: NavbarProps) => {
   return (
     <nav className="fixed top-0 right-0 left-0 z-50 border-b border-white/5 bg-[#171724]/80 backdrop-blur-md">
       <div className="mx-auto flex max-w-[1440px] items-center justify-between px-8 py-4">
-        <Link 
-          href={`/${lang}`} 
+        <Link
+          href={`/${lang}`}
           className="transition-opacity hover:opacity-90"
           onClick={() => setIsOpen(false)}
         >
           <Logo />
         </Link>
 
-        {/* Desktop Menu */}
         <div className="hidden items-center gap-8 text-sm font-medium lg:flex">
           {links.map((link) => (
-            <MyLink 
-              key={link.href} 
-              href={link.href} 
+            <MyLink
+              key={link.href}
+              href={link.href}
               variant={link.href === `/${lang}/projects` ? 'navbar-active' : 'navbar'}
             >
               {dict[link.labelKey as keyof typeof dict]}
@@ -61,7 +60,7 @@ export const Navbar = ({ dict, lang }: NavbarProps) => {
           <div className="hidden sm:block">
             <LanguageSwitcher lang={lang} />
           </div>
-          <AuthDialog 
+          <AuthDialog
             trigger={
               <Button className="flex items-center gap-2">
                 {dict.login} <MoveRight className="h-4 w-4" />
@@ -69,20 +68,14 @@ export const Navbar = ({ dict, lang }: NavbarProps) => {
             }
           />
 
-          {/* Burger Button */}
-          <BurgerButton 
-            isOpen={isOpen} 
-            onClick={() => setIsOpen(!isOpen)} 
-            className="lg:hidden"
-          />
+          <BurgerButton isOpen={isOpen} onClick={() => setIsOpen(!isOpen)} className="lg:hidden" />
         </div>
       </div>
 
-      {/* Mobile Menu */}
-      <div 
+      <div
         className={cn(
-          "absolute top-full left-0 right-0 border-t border-white/5 bg-[#171724] p-4 transition-all duration-300 ease-in-out lg:hidden",
-          isOpen ? "translate-y-0 opacity-100 visible" : "-translate-y-4 opacity-0 invisible"
+          'absolute top-full right-0 left-0 border-t border-white/5 bg-[#171724] p-4 transition-all duration-300 ease-in-out lg:hidden',
+          isOpen ? 'visible translate-y-0 opacity-100' : 'invisible -translate-y-4 opacity-0',
         )}
       >
         <div className="flex flex-col gap-4">

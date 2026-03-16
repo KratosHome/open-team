@@ -3,6 +3,7 @@ import React from 'react';
 
 import { Button } from '@/components/ui/button';
 import { HeroSectionProps } from '@/types/hero';
+
 import { StatCard } from './StatCard';
 import { StepCard } from './StepCard';
 
@@ -10,7 +11,6 @@ export const HeroSection = ({ dict, stats }: HeroSectionProps) => {
   return (
     <div className="pt-24 pb-20">
       <main className="grid grid-cols-1 items-center gap-16 lg:grid-cols-2">
-        {/* Left Column */}
         <div className="flex flex-col gap-10">
           <div className="inline-flex w-fit items-center gap-3 rounded-2xl border border-white/5 bg-[#1e2230]/50 px-4 py-2 text-xs font-medium text-white/60 backdrop-blur-sm">
             <div className="flex items-center gap-1.5">
@@ -54,7 +54,6 @@ export const HeroSection = ({ dict, stats }: HeroSectionProps) => {
           </div>
         </div>
 
-        {/* Right Column */}
         <div className="relative flex flex-col gap-6 pt-4">
           <div className="flex justify-start md:justify-end">
             <h2 className="rounded-md bg-[#00ffa2]/10 px-3 py-1 text-[10px] font-bold tracking-[0.2em] text-[#00ffa2] uppercase">

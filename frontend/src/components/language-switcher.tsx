@@ -29,21 +29,15 @@ export function LanguageSwitcher({ lang }: { lang: Locale }) {
 
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger
-        render={<Button variant="outline" className="flex items-center gap-2" />}
-      >
+      <DropdownMenuTrigger render={<Button variant="outline" />}>
         <span>{lang === 'uk' ? '🇺🇦 UA' : '🇺🇸 EN'}</span>
         <span
           className={`h-2 w-2 rounded-full ${lang === 'uk' ? 'bg-yellow-400' : 'bg-blue-400'}`}
         ></span>
       </DropdownMenuTrigger>
-      <DropdownMenuContent align="end" className="border-white/10 bg-[#171724] text-white">
+      <DropdownMenuContent align="end">
         {i18n.locales.map((locale) => (
-          <DropdownMenuItem
-            key={locale}
-            onClick={() => handleLocaleChange(locale)}
-            className="cursor-pointer hover:bg-white/10 focus:bg-white/10"
-          >
+          <DropdownMenuItem key={locale} onClick={() => handleLocaleChange(locale)}>
             {locale === 'uk' ? 'Українська' : 'English'}
           </DropdownMenuItem>
         ))}

@@ -12,6 +12,7 @@ import { Locale } from '@/i18n-config';
 import { getNavigationLinks } from '@/config/navigation';
 import { cn } from '@/lib/utils';
 import { BurgerButton } from '@/components/ui/burger-button';
+import { AuthDialog } from '@/components/auth/auth-dialog';
 
 interface NavbarProps {
   dict: {
@@ -60,9 +61,13 @@ export const Navbar = ({ dict, lang }: NavbarProps) => {
           <div className="hidden sm:block">
             <LanguageSwitcher lang={lang} />
           </div>
-          <Button className="flex">
-            {dict.login} <MoveRight className="h-4 w-4" />
-          </Button>
+          <AuthDialog 
+            trigger={
+              <Button className="flex items-center gap-2">
+                {dict.login} <MoveRight className="h-4 w-4" />
+              </Button>
+            }
+          />
 
           {/* Burger Button */}
           <BurgerButton 

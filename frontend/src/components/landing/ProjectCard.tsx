@@ -1,25 +1,12 @@
 'use client';
 
-import {
-  ArrowRight,
-  Calendar,
-  CheckCircle2,
-  Clock,
-  LucideIcon,
-  TrendingUp,
-  Users,
-  Zap,
-} from 'lucide-react';
+import { ArrowRight, Calendar, Clock, TrendingUp, Users, Zap } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
-import { Project } from '@/data/projects';
 import { cn } from '@/lib/utils';
+import { ProjectCardProps } from '@/types/projects';
 
-interface ProjectCardProps {
-  project: Project;
-}
-
-export function ProjectCard({ project }: ProjectCardProps) {
+export function ProjectCard({ project, dict }: ProjectCardProps) {
   const progressPercent = (project.funding.current / project.funding.target) * 100;
 
   return (
@@ -76,7 +63,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
 
         <div className="space-y-3">
           <h4 className="text-xs font-bold tracking-wider text-slate-500 uppercase">
-            Шукають у команду
+            {dict.seekingRolesTitle}
           </h4>
           <div className="space-y-2">
             {project.seekingRoles.map((role) => (
@@ -95,8 +82,11 @@ export function ProjectCard({ project }: ProjectCardProps) {
         <div className="space-y-2">
           <div className="flex justify-between text-xs font-bold">
             <span className="text-emerald-400">
-              {project.funding.current.toLocaleString()} / {project.funding.target.toLocaleString()}{' '}
-              <span className="text-[10px] opacity-70">₴</span>
+              <span className="text-emerald-400">
+                {project.funding.current.toLocaleString()} /{' '}
+                {project.funding.target.toLocaleString()}{' '}
+                <span className="text-[10px] opacity-70">₴</span>
+              </span>
             </span>
           </div>
           <div className="h-1.5 w-full overflow-hidden rounded-full bg-white/5">
@@ -148,10 +138,9 @@ export function ProjectCard({ project }: ProjectCardProps) {
         </div>
       </div>
 
-      {/* Action Button */}
       <div className="p-4 pt-0">
         <Button variant="success" className="w-full">
-          Приєднатись
+          {dict.join}
           <ArrowRight size={18} className="transition-transform group-hover/btn:translate-x-1" />
         </Button>
       </div>

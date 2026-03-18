@@ -2,10 +2,11 @@ import { Zap } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
 import { mockProjects } from '@/data/projects';
+import { ProjectsSectionProps } from '@/types/projects';
 
 import { ProjectCard } from './ProjectCard';
 
-export function ProjectsSection() {
+export function ProjectsSection({ dict, projects }: ProjectsSectionProps) {
   return (
     <section className="space-y-8 py-16 md:space-y-10 md:py-24">
       <div className="flex flex-col gap-4 sm:gap-5 md:flex-row md:items-start md:justify-between">
@@ -16,11 +17,11 @@ export function ProjectsSection() {
 
           <div className="min-w-0">
             <h2 className="text-2xl font-semibold tracking-tight text-white sm:text-3xl md:text-4xl">
-              Активні проєкти
+              {dict.title}
             </h2>
 
             <p className="mt-1 max-w-[560px] text-sm leading-5 text-slate-400 sm:text-base">
-              Приєднуйся до команд які шукають професіоналів прямо зараз
+              {dict.description}
             </p>
           </div>
         </div>
@@ -29,13 +30,13 @@ export function ProjectsSection() {
           variant="outline"
           className="w-full border-[#3D3D57] bg-[#212133] text-white hover:border-[#4A4A6A] hover:bg-[#2A2A44] sm:w-fit"
         >
-          Всі проєкти →
+          {dict.viewAll}
         </Button>
       </div>
 
       <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-        {mockProjects.map((project) => (
-          <ProjectCard key={project.id} project={project} />
+        {projects.map((project) => (
+          <ProjectCard key={project.id} project={project} dict={dict} />
         ))}
       </div>
     </section>

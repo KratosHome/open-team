@@ -25,6 +25,15 @@
       "step4Description": "Earn tokens for every completed task or a stable monthly reward for your contribution."
     }
   },
+  "projects": {
+    "title": "Active Projects",
+    "description": "Join teams that are looking for professionals right now.",
+    "viewAll": "All Projects →",
+    "seekingRolesTitle": "Hiring for the Team",
+    "join": "Join Project",
+    "endsIn": "Ends in {count} days",
+    "openRoles": "{count} open roles"
+  },
   "metadata": {
     "title": "TeamHub — Your Idea, Our Team",
     "description": "A platform where ideas become products. Build a team, complete tasks, and earn tokens.",

@@ -20,7 +20,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
 
 interface AuthDialogProps {
-  trigger?: React.ReactNode;
+  trigger?: React.ReactElement;
   defaultTab?: 'login' | 'register';
   dict: {
     auth: {
@@ -54,6 +54,11 @@ interface AuthDialogProps {
 export function AuthDialog({ trigger, defaultTab = 'login', dict }: AuthDialogProps) {
   const [activeTab, setActiveTab] = useState<string>(defaultTab);
   const [isOpen, setIsOpen] = useState(false);
+  const triggerElement = trigger || (
+    <Button variant="default" className="flex items-center gap-2">
+      {dict.auth.login} <MoveRight className="h-4 w-4" />
+    </Button>
+  );
 
   const loginSchema = z.object({
     email: z.string().email(dict.auth.validation.invalidEmail),
@@ -107,13 +112,7 @@ export function AuthDialog({ trigger, defaultTab = 'login', dict }: AuthDialogPr
 
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
-      <DialogTrigger>
-        {trigger || (
-          <Button variant="default" className="flex items-center gap-2">
-            {dict.auth.login} <MoveRight className="h-4 w-4" />
-          </Button>
-        )}
-      </DialogTrigger>
+      <DialogTrigger render={triggerElement} />
       <DialogContent className="overflow-hidden border-white/10 bg-[#161922]/95 p-0 shadow-[0_8px_32px_0_rgba(0,0,0,0.5)] backdrop-blur-xl sm:max-w-[420px]">
         <div className="mt-3 p-6">
           <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">

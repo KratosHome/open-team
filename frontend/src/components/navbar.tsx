@@ -25,7 +25,7 @@ export const Navbar = ({ dict, lang }: NavbarProps) => {
 
   return (
     <nav className="fixed top-0 right-0 left-0 z-50 border-b border-white/5 bg-[#171724]/80 backdrop-blur-md">
-      <div className="mx-auto flex max-w-[1440px] items-center justify-between px-8 py-4">
+      <div className="mx-auto flex max-w-[1440px] items-center justify-between px-3 py-4 md:px-8">
         <Link
           href={`/${lang}`}
           className="transition-opacity hover:opacity-90"

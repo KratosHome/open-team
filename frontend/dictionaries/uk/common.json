@@ -34,5 +34,30 @@
       "passwordTooShort": "Пароль має бути не менше 6 символів",
       "nameTooShort": "Ім'я занадто коротке"
     }
+  },
+  "footer": {
+    "description": "Платформа для запуску проєктів з токен-винагородою для команди.",
+    "platform": "Платформа",
+    "company": "Компанія",
+    "support": "Підтримка",
+    "projects": "Проєкти",
+    "community": "Ком'юніті",
+    "tokenomics": "Токеноміка",
+    "documentation": "Документація",
+    "blog": "Блог",
+    "rules": "Правила",
+    "faq": "FAQ",
+    "about": "Про нас",
+    "contact": "Зв'язатись",
+    "reportBug": "Репорт баг",
+    "partnership": "Партнерство",
+    "pressKit": "Пресс-кіт",
+    "stayInTouch": "Будь в курсі",
+    "subscribeDescription": "Отримуй оновлення про нові проєкти та токени.",
+    "emailPlaceholder": "Email адреса...",
+    "subscribe": "Підписатись",
+    "copyright": "© 2026 TeamHub. Всі права захищено.",
+    "privacyPolicy": "Політика конфіденційності",
+    "termsOfUse": "Умови використання"
   }
 }

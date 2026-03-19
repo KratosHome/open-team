@@ -11,6 +11,7 @@ import { Button } from '@/components/ui/button';
 import { Logo } from '@/components/ui/logo';
 import { MyLink } from '@/components/ui/my-link';
 import { getNavigationLinks } from '@/config/navigation';
+import { getProjectHref } from '@/config/project-links';
 import { Locale } from '@/i18n-config';
 import { cn } from '@/lib/utils';
 
@@ -31,7 +32,7 @@ export const Navbar = ({ dict, lang }: NavbarProps) => {
     <nav className="fixed top-0 right-0 left-0 z-50 border-b border-white/5 bg-[#171724]/80 backdrop-blur-md">
       <div className="mx-auto flex max-w-[1440px] items-center justify-between px-3 py-4 md:px-8">
         <Link
-          href={`/${lang}`}
+          href={getProjectHref(lang, 'home')}
           className="transition-opacity hover:opacity-90"
           onClick={() => setIsOpen(false)}
         >

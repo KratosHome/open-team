@@ -8,6 +8,8 @@ import '../globals.css';
 import type { Locale } from '@/i18n-config';
 
 import { Navbar } from '@/components/navbar';
+import { Footer } from '@/components/footer';
+import { getLocaleAlternates, getProjectHref, siteLinksConfig } from '@/config/project-links';
 import { i18n } from '@/i18n-config';
 import { getDictionary } from '@/lib/get-dictionary';
 
@@ -45,22 +47,20 @@ export async function generateMetadata({
     title: dict.metadata.title,
     description: dict.metadata.description,
     keywords: dict.metadata.keywords,
-    manifest: '/manifest.json',
+    manifest: siteLinksConfig.manifestPath,
     icons: {
-      icon: '/favicon.ico',
-      apple: '/apple-touch-icon.png',
+      icon: siteLinksConfig.icons.favicon,
+      apple: siteLinksConfig.icons.appleTouch,
     },
     alternates: {
-      canonical: `/${locale}`,
-      languages: {
-        en: '/en',
-        uk: '/uk',
-      },
+      canonical: getProjectHref(locale, 'home'),
+      languages: getLocaleAlternates('home'),
     },
     openGraph: {
       title: dict.metadata.title,
       description: dict.metadata.description,
       type: 'website',
+      url: getProjectHref(locale, 'home'),
       locale: locale === 'uk' ? 'uk_UA' : 'en_US',
     },
     twitter: {
@@ -91,7 +91,9 @@ export default async function RootLayout({
           <Navbar dict={dict} lang={locale} />
         </header>
         <main>{children}</main>
-        <footer>footer</footer>
+        <footer>
+          <Footer dict={dict} lang={locale} />
+        </footer>
       </body>
     </html>
   );

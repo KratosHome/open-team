@@ -34,5 +34,30 @@
       "passwordTooShort": "Password must be at least 6 characters",
       "nameTooShort": "Name is too short"
     }
+  },
+  "footer": {
+    "description": "Platform for launching projects with token rewards for the team.",
+    "platform": "Platform",
+    "company": "Company",
+    "support": "Support",
+    "projects": "Projects",
+    "community": "Community",
+    "tokenomics": "Tokenomics",
+    "documentation": "Documentation",
+    "blog": "Blog",
+    "rules": "Rules",
+    "faq": "FAQ",
+    "about": "About us",
+    "contact": "Contact us",
+    "reportBug": "Report a bug",
+    "partnership": "Partnership",
+    "pressKit": "Press kit",
+    "stayInTouch": "Stay in touch",
+    "subscribeDescription": "Get updates on new projects and tokens.",
+    "emailPlaceholder": "Email address...",
+    "subscribe": "Subscribe",
+    "copyright": "© 2026 TeamHub. All rights reserved.",
+    "privacyPolicy": "Privacy Policy",
+    "termsOfUse": "Terms of Use"
   }
 }

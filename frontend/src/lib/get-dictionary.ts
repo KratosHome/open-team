@@ -12,7 +12,9 @@ const dictionaries = {
   },
 };
 
-export const getDictionary = async <T extends keyof (typeof dictionaries)['en']>(
+export type DictionaryPart = keyof (typeof dictionaries)['en'];
+
+export const getDictionary = async <T extends DictionaryPart>(
   locale: Locale,
   part: T = 'common' as T
 ) => {

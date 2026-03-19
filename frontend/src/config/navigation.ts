@@ -1,4 +1,5 @@
-import { Locale } from '@/i18n-config';
+import type { Locale } from '@/i18n-config';
+import { getProjectHref, projectLinks } from '@/config/project-links';
 
 export interface NavLink {
   href: string;
@@ -6,12 +7,10 @@ export interface NavLink {
   variant?: 'navbar' | 'navbar-active';
 }
 
-export const getNavigationLinks = (lang: Locale): NavLink[] => [
-  { href: `/${lang}/projects`, labelKey: 'projects' },
-  { href: `/${lang}/community`, labelKey: 'community' },
-  { href: `/${lang}/blog`, labelKey: 'blog' },
-  { href: `/${lang}/rules`, labelKey: 'rules' },
-  { href: `/${lang}/faq`, labelKey: 'faq' },
-  { href: `/${lang}/docs`, labelKey: 'documentation' },
-  { href: `/${lang}/tokenomics`, labelKey: 'tokenomics' },
-];
+export const getNavigationLinks = (lang: Locale): NavLink[] =>
+  projectLinks
+    .filter((link) => link.inNavigation && link.labelKey)
+    .map((link) => ({
+      href: getProjectHref(lang, link.key),
+      labelKey: link.labelKey!,
+    }));

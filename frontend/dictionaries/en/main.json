@@ -38,5 +38,22 @@
     "title": "TeamHub — Your Idea, Our Team",
     "description": "A platform where ideas become products. Build a team, complete tasks, and earn tokens.",
     "keywords": "open team, project management, web3, tokens, collaboration, team hub"
+  },
+  "tokenSystem": {
+    "title": "Token Distribution in OpenTeam",
+    "subtitle": "The reward system is based on transparent criteria set by the founder at launch, strengthening the ecosystem after the product's release.",
+    "step1": {
+      "title": "Reward Mechanism",
+      "description": "Team members earn tokens for each completed task or receive a fixed payment for a specific role or period. This flexible format allows founders to adapt the project's economy to its specific needs."
+    },
+    "step2": {
+      "title": "Team Reserve Pool",
+      "description": "The founder determines the token allocation for the team based on the chosen business model. For example: 5M tokens (for 20% of profit) or 100k tokens (for 1% of profit). Tokens become available after the project launch; the model can also include milestone-based unlocks or a reserve for future key roles."
+    },
+    "step3": {
+      "title": "Burning and Sustainability",
+      "description": "Once a project becomes profitable, 20% of its revenue is allocated to buying back and burning OpenTeam tokens. This reduces the amount of tokens in circulation and supports the ecosystem's long-term value.",
+      "linkLabel": "Learn more about the burn mechanics"
+    }
   }
 }

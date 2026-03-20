@@ -1,5 +1,4 @@
 import { Project } from '@/data/projects';
-import { Locale } from '@/i18n-config';
 
 export interface ProjectsDictionary {
   title: string;

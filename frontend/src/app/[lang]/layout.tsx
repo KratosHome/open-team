@@ -9,18 +9,24 @@ import type { Locale } from '@/i18n-config';
 
 import { Navbar } from '@/components/navbar';
 import { Footer } from '@/components/footer';
-import { getLocaleAlternates, getProjectHref, siteLinksConfig } from '@/config/project-links';
+import {
+  getAbsoluteProjectUrl,
+  getLocaleAlternates,
+  siteLinksConfig,
+} from '@/config/project-links';
 import { i18n } from '@/i18n-config';
 import { getDictionary } from '@/lib/get-dictionary';
 
 const inter = Inter({
   subsets: ['latin', 'cyrillic'],
   variable: '--font-inter',
+  display: 'swap',
 });
 
 const geistMono = Geist_Mono({
   subsets: ['latin'],
   variable: '--font-geist-mono',
+  display: 'swap',
 });
 
 export const viewport: Viewport = {
@@ -44,6 +50,7 @@ export async function generateMetadata({
   const dict = await getDictionary(locale, 'main');
 
   return {
+    metadataBase: new URL(siteLinksConfig.baseUrl),
     title: dict.metadata.title,
     description: dict.metadata.description,
     keywords: dict.metadata.keywords,
@@ -53,14 +60,14 @@ export async function generateMetadata({
       apple: siteLinksConfig.icons.appleTouch,
     },
     alternates: {
-      canonical: getProjectHref(locale, 'home'),
+      canonical: getAbsoluteProjectUrl(locale, 'home'),
       languages: getLocaleAlternates('home'),
     },
     openGraph: {
       title: dict.metadata.title,
       description: dict.metadata.description,
       type: 'website',
-      url: getProjectHref(locale, 'home'),
+      url: getAbsoluteProjectUrl(locale, 'home'),
       locale: locale === 'uk' ? 'uk_UA' : 'en_US',
     },
     twitter: {
@@ -81,9 +88,42 @@ export default async function RootLayout({
   const { lang } = await params;
   const locale = lang as Locale;
   const dict = await getDictionary(locale, 'common');
+  const mainDict = await getDictionary(locale, 'main');
+
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    name: 'TeamHub',
+    url: siteLinksConfig.baseUrl,
+    logo: `${siteLinksConfig.baseUrl}${siteLinksConfig.icons.favicon}`,
+    description: mainDict.metadata.description,
+    sameAs: [
+      'https://x.com/teamhub',
+      'https://linkedin.com/company/teamhub',
+      'https://t.me/teamhub',
+    ],
+  };
+
+  const websiteJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    name: 'TeamHub',
+    url: siteLinksConfig.baseUrl,
+    description: mainDict.metadata.description,
+  };
 
   return (
     <html lang={locale}>
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }}
+        />
+      </head>
       <body
         className={`${inter.className} ${geistMono.variable} relative bg-slate-950 antialiased`}
       >

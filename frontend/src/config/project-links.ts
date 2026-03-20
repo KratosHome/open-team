@@ -245,8 +245,8 @@ export const getAbsoluteProjectUrl = (lang: Locale, key: ProjectLinkKey) =>
 
 export const getLocaleAlternates = (key: ProjectLinkKey) =>
   ({
-    en: getProjectHref('en', key),
-    uk: getProjectHref('uk', key),
+    en: getAbsoluteProjectUrl('en', key),
+    uk: getAbsoluteProjectUrl('uk', key),
   }) satisfies Record<Locale, string>;
 
 export const getSitemapPaths = () =>

@@ -94,8 +94,11 @@ export const Footer: React.FC<FooterProps> = ({ dict, lang }) => {
                   href={social.href}
                   className="flex h-9 w-9 items-center justify-center rounded-lg bg-white/5 text-gray-400 transition-colors hover:bg-white/10 hover:text-white"
                   aria-label={social.label}
+                  target="_blank"
+                  rel="noopener noreferrer"
                 >
-                  {socialIcons[social.key]}
+                  <span className="sr-only">{social.label}</span>
+                  {socialIcons[social.key as keyof typeof socialIcons]}
                 </Link>
               ))}
             </div>
@@ -137,10 +140,15 @@ export const Footer: React.FC<FooterProps> = ({ dict, lang }) => {
                 type="email"
                 placeholder={footerDict.emailPlaceholder}
                 className="h-11 border-white/10 bg-white/5 text-sm ring-offset-[#020617] focus-visible:ring-[#57b9ff]"
+                aria-label={footerDict.emailPlaceholder}
               />
-              <Button variant="success" className="h-11 w-full justify-between px-4 font-semibold">
+              <Button 
+                variant="success" 
+                className="h-11 w-full justify-between px-4 font-semibold"
+                aria-label={footerDict.subscribe}
+              >
                 {footerDict.subscribe}
-                <ArrowRight className="h-4 w-4" />
+                <ArrowRight className="h-4 w-4" aria-hidden="true" />
               </Button>
             </div>
           </div>

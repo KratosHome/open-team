@@ -1,7 +1,6 @@
 import { Zap } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
-import { mockProjects } from '@/data/projects';
 import { ProjectsSectionProps } from '@/types/projects';
 
 import { ProjectCard } from './ProjectCard';

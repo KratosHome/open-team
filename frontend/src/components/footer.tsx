@@ -1,7 +1,10 @@
 'use client';
 
-import React from 'react';
+import React, { useRef } from 'react';
 import Link from 'next/link';
+import { useGSAP } from '@gsap/react';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Linkedin, Send, Twitter, ArrowRight } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
@@ -15,6 +18,8 @@ import {
   type FooterSectionKey,
 } from '@/config/project-links';
 import type { Locale } from '@/i18n-config';
+
+gsap.registerPlugin(ScrollTrigger);
 
 interface FooterProps {
   dict: {
@@ -49,6 +54,8 @@ interface FooterProps {
 
 export const Footer: React.FC<FooterProps> = ({ dict, lang }) => {
   const footerDict = dict.footer;
+  const containerRef = useRef<HTMLElement>(null);
+
   const sectionTitles: Record<FooterSectionKey, string> = {
     platform: footerDict.platform,
     company: footerDict.company,
@@ -77,12 +84,45 @@ export const Footer: React.FC<FooterProps> = ({ dict, lang }) => {
     telegram: <Send className="h-4 w-4" />,
   };
 
+  useGSAP(
+    () => {
+      // Animate footer columns
+      gsap.to('.footer-col', {
+        y: 0,
+        opacity: 1,
+        duration: 0.6,
+        stagger: 0.1,
+        ease: 'power2.out',
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: 'top 90%',
+          toggleActions: 'play none none none',
+        },
+      });
+
+      // Animate bottom bar
+      gsap.to('.footer-bottom', {
+        opacity: 1,
+        y: 0,
+        duration: 0.8,
+        delay: 0.4,
+        ease: 'power2.out',
+        scrollTrigger: {
+          trigger: '.footer-bottom',
+          start: 'top 95%',
+          toggleActions: 'play none none none',
+        },
+      });
+    },
+    { scope: containerRef }
+  );
+
   return (
-    <footer className="w-full border-t border-white/5 bg-[#020617] pt-16 pb-8 text-gray-400">
+    <footer ref={containerRef} className="w-full border-t border-white/5 bg-[#020617] pt-16 pb-8 text-gray-400">
       <div className="container mx-auto px-4 lg:px-8">
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:gap-8">
           {/* Logo and Description */}
-          <div className="lg:col-span-4">
+          <div className="footer-col translate-y-5 opacity-0 will-change-[transform,opacity] lg:col-span-4">
             <Logo size="md" className="mb-6" />
             <p className="mb-8 max-w-xs text-sm leading-relaxed">
               {footerDict.description}
@@ -105,7 +145,7 @@ export const Footer: React.FC<FooterProps> = ({ dict, lang }) => {
           </div>
 
           {/* Navigation Columns */}
-          <div className="grid grid-cols-2 gap-8 sm:grid-cols-3 lg:col-span-5">
+          <div className="footer-col translate-y-5 opacity-0 will-change-[transform,opacity] grid grid-cols-2 gap-8 sm:grid-cols-3 lg:col-span-5">
             {footerSections.map((column) => (
               <div key={column.titleKey}>
                 <h3 className="mb-6 text-sm font-semibold text-white">
@@ -128,7 +168,7 @@ export const Footer: React.FC<FooterProps> = ({ dict, lang }) => {
           </div>
 
           {/* Subscription Section */}
-          <div className="lg:col-span-3">
+          <div className="footer-col translate-y-5 opacity-0 will-change-[transform,opacity] lg:col-span-3">
             <h3 className="mb-6 text-sm font-semibold text-white">
               {footerDict.stayInTouch}
             </h3>
@@ -155,7 +195,7 @@ export const Footer: React.FC<FooterProps> = ({ dict, lang }) => {
         </div>
 
         {/* Bottom Bar */}
-        <div className="mt-16 flex flex-col items-center justify-between gap-6 border-t border-white/5 pt-8 lg:flex-row lg:gap-0">
+        <div className="footer-bottom translate-y-3 opacity-0 will-change-[transform,opacity] mt-16 flex flex-col items-center justify-between gap-6 border-t border-white/5 pt-8 lg:flex-row lg:gap-0">
           <p className="text-xs">
             {footerDict.copyright}
           </p>

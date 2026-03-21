@@ -1,6 +1,5 @@
+import dynamic from 'next/dynamic';
 import { HeroSection } from '@/components/landing/HeroSection';
-import { ProjectsSection } from '@/components/landing/ProjectsSection';
-import { TokenSystemSection } from '@/components/landing/TokenSystemSection';
 import { mockLandingStats } from '@/data/landing-stats';
 import { mockProjects } from '@/data/projects';
 import { Locale } from '@/i18n-config';
@@ -8,6 +7,16 @@ import { getDictionary } from '@/lib/get-dictionary';
 import { HeroDictionary } from '@/types/hero';
 import { ProjectsDictionary } from '@/types/projects';
 import { TokenSystemDictionary } from '@/types/token-system';
+
+const ProjectsSection = dynamic(() => import('@/components/landing/ProjectsSection').then(mod => mod.ProjectsSection), {
+  ssr: true,
+  loading: () => <div className="min-h-[400px]" />
+});
+
+const TokenSystemSection = dynamic(() => import('@/components/landing/TokenSystemSection').then(mod => mod.TokenSystemSection), {
+  ssr: true,
+  loading: () => <div className="min-h-[400px]" />
+});
 
 interface MainDictionary {
   hero: HeroDictionary;

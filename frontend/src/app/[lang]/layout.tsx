@@ -7,8 +7,12 @@ import '../globals.css';
 
 import type { Locale } from '@/i18n-config';
 
+import dynamic from 'next/dynamic';
 import { Navbar } from '@/components/navbar';
-import { Footer } from '@/components/footer';
+
+const Footer = dynamic(() => import('@/components/footer').then(mod => mod.Footer), {
+  ssr: true,
+});
 import {
   getAbsoluteProjectUrl,
   getLocaleAlternates,

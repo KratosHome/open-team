@@ -31,7 +31,6 @@ export interface Project {
     openRoles: number;
   };
   team: ProjectTeamMember[];
-  accentColor: string;
 }
 
 export const mockProjects: Project[] = [
@@ -65,7 +64,6 @@ export const mockProjects: Project[] = [
       { id: '2', initials: 'ДЦ', color: 'bg-purple-500' },
       { id: '3', initials: 'АП', color: 'bg-emerald-500' },
     ],
-    accentColor: 'border-emerald-500',
   },
   {
     id: '2',
@@ -96,7 +94,6 @@ export const mockProjects: Project[] = [
       { id: '4', initials: 'АМ', color: 'bg-blue-600' },
       { id: '5', initials: 'БК', color: 'bg-purple-600' },
     ],
-    accentColor: 'border-purple-500',
   },
   {
     id: '3',
@@ -128,6 +125,5 @@ export const mockProjects: Project[] = [
       { id: '7', initials: 'ОП', color: 'bg-purple-400' },
       { id: '8', initials: 'МВ', color: 'bg-emerald-400' },
     ],
-    accentColor: 'border-emerald-500',
   },
 ];

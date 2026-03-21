@@ -13,19 +13,9 @@ export function ProjectCard({ project, dict }: ProjectCardProps) {
     <div
       className={cn(
         'group relative flex flex-col overflow-hidden rounded-3xl border transition-all duration-300',
-        'border-white/5 bg-[#161922]/40 backdrop-blur-xl hover:border-white/10 hover:shadow-2xl hover:shadow-black/40',
-        project.accentColor ? project.accentColor : 'border-emerald-500/30',
+        'border-t-3 border-emerald-500/30 border-t-emerald-400/80 bg-[#161922]/40 backdrop-blur-xl hover:border-blue-500/40 hover:border-t-blue-400/90 hover:shadow-2xl hover:shadow-blue-950/30',
       )}
     >
-      <div
-        className={cn(
-          'absolute top-0 right-0 left-0 h-1 bg-gradient-to-r transition-opacity duration-300',
-          project.accentColor === 'border-emerald-500'
-            ? 'from-emerald-500/50 to-cyan-500/50'
-            : 'from-purple-500/50 to-pink-500/50',
-        )}
-      />
-
       <div className="flex flex-grow flex-col space-y-6 p-6">
         <div className="flex items-start justify-between">
           <h3 className="text-2xl font-bold tracking-tight text-white">{project.title}</h3>

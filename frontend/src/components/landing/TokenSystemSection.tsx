@@ -4,15 +4,12 @@ import { Laptop, Zap, CircleDollarSign, Link2 } from 'lucide-react';
 import React, { useRef } from 'react';
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 import { getProjectHref } from '@/config/project-links';
 import type { Locale } from '@/i18n-config';
 import type { TokenSystemDictionary } from '@/types/token-system';
 
 import { StepCard } from './StepCard';
-
-gsap.registerPlugin(ScrollTrigger);
 
 interface TokenSystemSectionProps {
   dict: TokenSystemDictionary;

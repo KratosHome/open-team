@@ -82,6 +82,8 @@ export async function generateMetadata({
   };
 }
 
+import { GSAPProvider } from '@/providers/GSAPProvider';
+
 export default async function RootLayout({
   children,
   params,
@@ -131,13 +133,15 @@ export default async function RootLayout({
       <body
         className={`${inter.className} ${geistMono.variable} relative bg-slate-950 antialiased`}
       >
-        <header>
-          <Navbar dict={dict} lang={locale} />
-        </header>
-        <main>{children}</main>
-        <footer>
-          <Footer dict={dict} lang={locale} />
-        </footer>
+        <GSAPProvider>
+          <header>
+            <Navbar dict={dict} lang={locale} />
+          </header>
+          <main>{children}</main>
+          <footer>
+            <Footer dict={dict} lang={locale} />
+          </footer>
+        </GSAPProvider>
       </body>
     </html>
   );

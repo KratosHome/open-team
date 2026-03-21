@@ -4,7 +4,6 @@ import React, { useRef } from 'react';
 import Link from 'next/link';
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Linkedin, Send, Twitter, ArrowRight } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
@@ -18,8 +17,6 @@ import {
   type FooterSectionKey,
 } from '@/config/project-links';
 import type { Locale } from '@/i18n-config';
-
-gsap.registerPlugin(ScrollTrigger);
 
 interface FooterProps {
   dict: {

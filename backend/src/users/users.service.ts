@@ -8,6 +8,8 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { CreateUserDto } from './dto/create-user.dto';
 import { User } from './entities/user.entity';
+import { ProjectTeamRole } from './enums/project-team-role.enum';
+import { UserRole } from './enums/user-role.enum';
 
 type QueryErrorWithCode = {
   code?: string;
@@ -31,6 +33,8 @@ export class UsersService {
     const user = this.usersRepository.create({
       ...userData,
       password: hashedPassword,
+      role: UserRole.USER,
+      projectRoles: [] as ProjectTeamRole[],
     });
 
     try {

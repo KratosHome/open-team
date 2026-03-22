@@ -1,8 +1,13 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { INestApplication, ValidationPipe, ClassSerializerInterceptor } from '@nestjs/common';
+import {
+  INestApplication,
+  ValidationPipe,
+  ClassSerializerInterceptor,
+} from '@nestjs/common';
 import request from 'supertest';
 import { AppModule } from './../src/app.module';
 import { Reflector } from '@nestjs/core';
+import { UserRole } from './../src/users/enums/user-role.enum';
 
 describe('UsersController (e2e)', () => {
   let app: INestApplication;
@@ -20,7 +25,9 @@ describe('UsersController (e2e)', () => {
         transform: true,
       }),
     );
-    app.useGlobalInterceptors(new ClassSerializerInterceptor(app.get(Reflector)));
+    app.useGlobalInterceptors(
+      new ClassSerializerInterceptor(app.get(Reflector)),
+    );
     await app.init();
   });
 
@@ -43,6 +50,8 @@ describe('UsersController (e2e)', () => {
     expect(response.body).toHaveProperty('id');
     expect(response.body.name).toBe(createUserDto.name);
     expect(response.body.email).toBe(createUserDto.email);
+    expect(response.body.role).toBe(UserRole.USER);
+    expect(response.body.projectRoles).toEqual([]);
     expect(response.body).not.toHaveProperty('password');
     expect(response.body).toHaveProperty('createdAt');
     expect(response.body).toHaveProperty('updatedAt');
@@ -56,6 +65,8 @@ describe('UsersController (e2e)', () => {
     expect(Array.isArray(response.body)).toBe(true);
     if (response.body.length > 0) {
       expect(response.body[0]).not.toHaveProperty('password');
+      expect(response.body[0]).toHaveProperty('role');
+      expect(response.body[0]).toHaveProperty('projectRoles');
     }
   });
 });

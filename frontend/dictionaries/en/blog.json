@@ -1,0 +1,10 @@
+{
+  "page": {
+    "title": "Publish",
+    "titleHighlight": "Articles",
+    "description": "Manage your publication content, announcements, and technical updates.",
+    "newArticle": "New Article",
+    "emptyStateTitle": "Your canvas awaits",
+    "emptyStateDesc": "You haven't written any posts yet. Start crafting your first announcement to engage with the OpenTeam community."
+  }
+}

@@ -1,20 +1,31 @@
 import { PenLine } from "lucide-react";
+import { getDictionary } from '@/lib/get-dictionary';
+import { Locale } from '@/i18n-config';
 
-export default function AdminBlogPage() {
+export default async function AdminBlogPage({
+  params,
+}: {
+  params: Promise<{ lang: string }>;
+}) {
+  const { lang } = await params;
+  const locale = lang as Locale;
+  const blogDict = await getDictionary(locale, 'blog');
+  const d = blogDict.page;
+
   return (
     <div className="w-full">
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-10 gap-4 animate-hero-left">
         <div>
           <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight text-white mb-3">
-            Publish <span className="text-gradient-cyan">Articles</span>
+            {d.title} <span className="text-gradient-cyan">{d.titleHighlight}</span>
           </h1>
           <p className="text-slate-400 text-lg max-w-2xl leading-relaxed">
-            Manage your publication content, announcements, and technical updates.
+            {d.description}
           </p>
         </div>
         <button className="flex items-center gap-2 bg-gradient-to-r from-cyan-500 to-emerald-500 hover:from-cyan-400 hover:to-emerald-400 text-white px-6 py-3 rounded-xl font-semibold shadow-lg shadow-cyan-500/25 transition-all duration-300 hover:scale-105 active:scale-95">
           <PenLine size={18} />
-          <span>New Article</span>
+          <span>{d.newArticle}</span>
         </button>
       </div>
 
@@ -25,9 +36,9 @@ export default function AdminBlogPage() {
           <PenLine size={32} className="text-slate-400 group-hover:text-cyan-400 transition-colors duration-500" />
         </div>
         
-        <h3 className="text-2xl font-bold text-white mb-2 tracking-tight">Your canvas awaits</h3>
+        <h3 className="text-2xl font-bold text-white mb-2 tracking-tight">{d.emptyStateTitle}</h3>
         <p className="max-w-md text-slate-400 text-center leading-relaxed">
-          You haven't written any posts yet. Start crafting your first announcement to engage with the OpenTeam community.
+          {d.emptyStateDesc}
         </p>
       </div>
     </div>

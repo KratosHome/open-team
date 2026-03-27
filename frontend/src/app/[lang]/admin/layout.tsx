@@ -1,6 +1,8 @@
 import React from 'react';
 import Link from 'next/link';
 import { Users, FileText, LayoutDashboard, Settings, LogOut } from 'lucide-react';
+import { getDictionary } from '@/lib/get-dictionary';
+import { Locale } from '@/i18n-config';
 
 export default async function AdminLayout({
   children,
@@ -10,6 +12,9 @@ export default async function AdminLayout({
   params: Promise<{ lang: string }>;
 }) {
   const { lang } = await params;
+  const locale = lang as Locale;
+  const adminDict = await getDictionary(locale, 'admin');
+
   return (
     <div className="flex min-h-screen bg-[#0c0e14] text-slate-50 relative overflow-hidden">
       {/* Background Glows */}
@@ -30,7 +35,7 @@ export default async function AdminLayout({
         </div>
         
         <div className="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-4 ml-1">
-          Management
+          {adminDict.management}
         </div>
         
         <nav className="space-y-2 flex-1 relative">
@@ -39,28 +44,28 @@ export default async function AdminLayout({
             className="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-300 hover:text-white hover:bg-white/5 transition-all duration-300 group relative"
           >
             <Users size={20} className="group-hover:text-cyan-400 transition-colors" />
-            <span className="font-medium">Users</span>
+            <span className="font-medium">{adminDict.users}</span>
           </Link>
           <Link
             href={`/${lang}/admin/blog`}
             className="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-300 hover:text-white hover:bg-white/5 transition-all duration-300 group"
           >
             <FileText size={20} className="group-hover:text-emerald-400 transition-colors" />
-            <span className="font-medium">Blog Posts</span>
+            <span className="font-medium">{adminDict.blogPosts}</span>
           </Link>
           <Link
             href={`/${lang}/admin/analytics`}
             className="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-500 hover:text-slate-300 hover:bg-white/5 transition-all duration-300 cursor-not-allowed group"
           >
             <LayoutDashboard size={20} className="group-hover:text-slate-400 transition-colors" />
-            <span className="font-medium">Analytics (Soon)</span>
+            <span className="font-medium">{adminDict.analytics}</span>
           </Link>
           <Link
             href={`/${lang}/admin/settings`}
             className="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-500 hover:text-slate-300 hover:bg-white/5 transition-all duration-300 cursor-not-allowed group"
           >
             <Settings size={20} className="group-hover:text-slate-400 transition-colors" />
-            <span className="font-medium">Settings (Soon)</span>
+            <span className="font-medium">{adminDict.settings}</span>
           </Link>
         </nav>
 
@@ -70,7 +75,7 @@ export default async function AdminLayout({
             className="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-400 hover:text-red-400 hover:bg-red-500/10 transition-all duration-300"
           >
             <LogOut size={20} />
-            <span className="font-medium">Exit Admin</span>
+            <span className="font-medium">{adminDict.exitAdmin}</span>
           </Link>
         </div>
       </aside>

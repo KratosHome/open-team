@@ -1,18 +1,16 @@
-"use client"
-
 import { ColumnDef } from "@tanstack/react-table"
 import { User } from "@/types/user"
 import { Shield, ShieldAlert, User as UserIcon } from "lucide-react"
 
-export const columns: ColumnDef<User>[] = [
+export const getColumns = (d: any): ColumnDef<User>[] => [
   {
     accessorKey: "id",
-    header: "ID",
+    header: d.id,
     cell: ({ row }) => <div className="text-slate-500 text-xs font-mono ml-1">#{row.getValue("id")}</div>,
   },
   {
     accessorKey: "name",
-    header: "User",
+    header: d.user,
     cell: ({ row }) => {
       const user = row.original;
       return (
@@ -30,14 +28,14 @@ export const columns: ColumnDef<User>[] = [
   },
   {
     accessorKey: "role",
-    header: "Access Level",
+    header: d.accessLevel,
     cell: ({ row }) => {
       const role = String(row.getValue("role")).toLowerCase()
       
       if (role === 'admin') {
         return (
           <div className="flex items-center gap-1.5 w-fit px-2.5 py-1 rounded-full bg-red-500/10 border border-red-500/20 text-red-400 text-xs font-bold uppercase tracking-wider">
-            <ShieldAlert size={14} /> Admin
+            <ShieldAlert size={14} /> {d.admin}
           </div>
         )
       }
@@ -45,7 +43,7 @@ export const columns: ColumnDef<User>[] = [
       if (role === 'moderator') {
         return (
           <div className="flex items-center gap-1.5 w-fit px-2.5 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-bold uppercase tracking-wider">
-            <Shield size={14} /> Mod
+            <Shield size={14} /> {d.mod}
           </div>
         )
       }
@@ -59,7 +57,7 @@ export const columns: ColumnDef<User>[] = [
   },
   {
     accessorKey: "createdAt",
-    header: "Joined Date",
+    header: d.joinedDate,
     cell: ({ row }) => {
       const date = new Date(row.getValue("createdAt"))
       return (

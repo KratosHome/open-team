@@ -1,11 +1,7 @@
-"use client"
+'use client';
 
-import {
-  ColumnDef,
-  flexRender,
-  getCoreRowModel,
-  useReactTable,
-} from "@tanstack/react-table"
+import { ColumnDef, flexRender, getCoreRowModel, useReactTable } from '@tanstack/react-table';
+import React from 'react';
 
 import {
   Table,
@@ -14,41 +10,43 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/ui/table"
+} from '@/components/ui/table';
+import { User } from '@/types/user';
 
-interface DataTableProps<TData, TValue> {
-  columns: ColumnDef<TData, TValue>[]
-  data: TData[]
+import { getColumns } from './columns';
+
+interface DataTableProps {
+  data: User[];
+  dict: any;
 }
 
-export function DataTable<TData, TValue>({
-  columns,
-  data,
-}: DataTableProps<TData, TValue>) {
+export function DataTable({ data, dict }: DataTableProps) {
+  const columns = React.useMemo(() => getColumns(dict.columns), [dict.columns]);
+
   const table = useReactTable({
     data,
     columns,
     getCoreRowModel: getCoreRowModel(),
-  })
+  });
 
   return (
-    <div className="rounded-xl border border-white/10 overflow-hidden bg-black/20 backdrop-blur-sm shadow-xl relative">
-      <div className="absolute inset-0 bg-gradient-to-b from-white/5 to-transparent pointer-events-none" />
+    <div className="relative overflow-hidden rounded-xl border border-white/10 bg-black/20 shadow-xl backdrop-blur-sm">
+      <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-white/5 to-transparent" />
       <Table className="relative w-full">
-        <TableHeader className="bg-white/5 border-b border-white/10">
+        <TableHeader className="border-b border-white/10 bg-white/5">
           {table.getHeaderGroups().map((headerGroup) => (
             <TableRow key={headerGroup.id} className="border-none hover:bg-transparent">
               {headerGroup.headers.map((header) => {
                 return (
-                  <TableHead key={header.id} className="text-slate-400 font-semibold uppercase tracking-wider text-xs py-4 px-6 h-auto">
+                  <TableHead
+                    key={header.id}
+                    className="h-auto px-6 py-4 text-xs font-semibold tracking-wider text-slate-400 uppercase"
+                  >
                     {header.isPlaceholder
                       ? null
-                      : flexRender(
-                          header.column.columnDef.header,
-                          header.getContext()
-                        )}
+                      : flexRender(header.column.columnDef.header, header.getContext())}
                   </TableHead>
-                )
+                );
               })}
             </TableRow>
           ))}
@@ -58,11 +56,14 @@ export function DataTable<TData, TValue>({
             table.getRowModel().rows.map((row) => (
               <TableRow
                 key={row.id}
-                data-state={row.getIsSelected() && "selected"}
-                className="border-b border-white/5 border-dashed hover:bg-white/5 transition-colors duration-200 group cursor-pointer"
+                data-state={row.getIsSelected() && 'selected'}
+                className="group cursor-pointer border-b border-dashed border-white/5 transition-colors duration-200 hover:bg-white/5"
               >
                 {row.getVisibleCells().map((cell) => (
-                  <TableCell key={cell.id} className="py-4 px-6 text-slate-300 font-medium group-hover:text-white transition-colors duration-200">
+                  <TableCell
+                    key={cell.id}
+                    className="px-6 py-4 font-medium text-slate-300 transition-colors duration-200 group-hover:text-white"
+                  >
                     {flexRender(cell.column.columnDef.cell, cell.getContext())}
                   </TableCell>
                 ))}
@@ -70,13 +71,13 @@ export function DataTable<TData, TValue>({
             ))
           ) : (
             <TableRow>
-              <TableCell colSpan={columns.length} className="h-48 text-center text-slate-500 font-medium">
-                No users found.
+              <TableCell colSpan={6} className="h-48 text-center font-medium text-slate-500">
+                {dict.page.noUsersFound}
               </TableCell>
             </TableRow>
           )}
         </TableBody>
       </Table>
     </div>
-  )
+  );
 }

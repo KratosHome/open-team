@@ -1,5 +1,6 @@
+import { getDictionary } from '@/lib/get-dictionary';
+import { Locale } from '@/i18n-config';
 import { User } from "@/types/user"
-import { columns } from "./columns"
 import { DataTable } from "./data-table"
 
 async function getUsers(): Promise<User[]> {
@@ -22,28 +23,37 @@ async function getUsers(): Promise<User[]> {
   }
 }
 
-export default async function AdminUsersPage() {
+export default async function AdminUsersPage({
+  params,
+}: {
+  params: Promise<{ lang: string }>;
+}) {
+  const { lang } = await params;
+  const locale = lang as Locale;
+  const usersDict = await getDictionary(locale, 'users');
+  const d = usersDict.page;
+
   const data = await getUsers();
 
   return (
     <div className="w-full">
       <div className="mb-10 animate-hero-left">
         <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight text-white mb-3">
-          Manage <span className="text-gradient-cyan">Users</span>
+          {d.title} <span className="text-gradient-cyan">{d.titleHighlight}</span>
         </h1>
         <p className="text-slate-400 text-lg max-w-2xl leading-relaxed">
-          View, edit, and orchestrate all registered participants across the OpenTeam platform.
+          {d.description}
         </p>
       </div>
       
       <div className="glass rounded-2xl border border-white/10 p-6 md:p-8 animate-hero-up animation-delay-200">
         <div className="flex items-center justify-between mb-6">
-          <h2 className="text-xl font-semibold text-white">Users Directory</h2>
+          <h2 className="text-xl font-semibold text-white">{d.directory}</h2>
           <div className="px-3 py-1 bg-cyan-500/10 text-cyan-400 border border-cyan-500/20 rounded-full text-xs font-medium tracking-wide">
-            {data.length} Total Users
+            {d.totalUsers.replace('{count}', String(data.length))}
           </div>
         </div>
-        <DataTable columns={columns} data={data} />
+        <DataTable data={data} dict={usersDict} />
       </div>
     </div>
   )

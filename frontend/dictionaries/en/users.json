@@ -1,0 +1,18 @@
+{
+  "page": {
+    "title": "Manage",
+    "titleHighlight": "Users",
+    "description": "View, edit, and orchestrate all registered participants across the OpenTeam platform.",
+    "directory": "Users Directory",
+    "totalUsers": "{count} Total Users",
+    "noUsersFound": "No users found."
+  },
+  "columns": {
+    "id": "ID",
+    "user": "User",
+    "accessLevel": "Access Level",
+    "joinedDate": "Joined Date",
+    "admin": "Admin",
+    "mod": "Mod"
+  }
+}

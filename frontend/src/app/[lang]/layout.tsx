@@ -24,13 +24,13 @@ import { getDictionary } from '@/lib/get-dictionary';
 const inter = Inter({
   subsets: ['latin', 'cyrillic'],
   variable: '--font-inter',
-  display: 'swap',
+  display: 'optional',
 });
 
 const geistMono = Geist_Mono({
   subsets: ['latin'],
   variable: '--font-geist-mono',
-  display: 'swap',
+  display: 'optional',
 });
 
 export const viewport: Viewport = {

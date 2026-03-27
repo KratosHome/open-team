@@ -48,7 +48,8 @@ function getDatabaseConfig(): TypeOrmModuleOptions {
           // Accept both the documented DATABASE_* keys and legacy DB_* aliases.
           host: readEnv('DATABASE_HOST', 'DB_HOST') ?? 'localhost',
           port: Number.isNaN(databasePort) ? 5432 : databasePort,
-          username: readEnv('DATABASE_USER', 'DB_USERNAME', 'DB_USER') ?? 'postgres',
+          username:
+            readEnv('DATABASE_USER', 'DB_USERNAME', 'DB_USER') ?? 'postgres',
           password: readEnv('DATABASE_PASSWORD', 'DB_PASSWORD') ?? 'postgres',
           database: readEnv('DATABASE_NAME', 'DB_NAME') ?? 'openteam',
         }),
@@ -60,10 +61,7 @@ function getDatabaseConfig(): TypeOrmModuleOptions {
 }
 
 @Module({
-  imports: [
-    TypeOrmModule.forRoot(getDatabaseConfig()),
-    UsersModule,
-  ],
+  imports: [TypeOrmModule.forRoot(getDatabaseConfig()), UsersModule],
   controllers: [AppController],
   providers: [AppService],
 })

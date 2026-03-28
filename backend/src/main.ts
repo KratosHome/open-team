@@ -59,10 +59,25 @@ function setupSwagger(app: INestApplication): void {
   });
 }
 
+function getCorsOrigins(): true | string[] {
+  const configuredOrigins = process.env.CORS_ORIGIN?.split(',')
+    .map((origin) => origin.trim())
+    .filter(Boolean);
+
+  if (!configuredOrigins || configuredOrigins.length === 0) {
+    return true;
+  }
+
+  return configuredOrigins;
+}
+
 async function bootstrap() {
   const logger = new Logger('Bootstrap');
   const { isFixed, preferredPort } = getPortConfig();
   const app = await NestFactory.create(AppModule);
+  app.enableCors({
+    origin: getCorsOrigins(),
+  });
   app.useGlobalPipes(
     new ValidationPipe({
       whitelist: true,
@@ -87,4 +102,4 @@ async function bootstrap() {
   logger.log(`Swagger UI is available at ${appUrl}/docs`);
   logger.log(`OpenAPI JSON is available at ${appUrl}/docs/openapi.json`);
 }
-bootstrap();
+void bootstrap();

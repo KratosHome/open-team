@@ -1,23 +1,67 @@
 import type { UsersDictionary } from '@/components/admin/users/users-dictionary';
-import type { AdminUsersPageProps } from '@/components/admin/users/users-page.server';
-import type { Metadata } from 'next';
 
 import { DataTable } from '@/components/admin/users/data-table';
-import { generateAdminUsersMetadata, getUsers } from '@/components/admin/users/users-page.server';
 import { Locale } from '@/i18n-config';
+import { getApiBaseUrl } from '@/lib/get-api-base-url';
 import { getDictionary } from '@/lib/get-dictionary';
+import { User } from '@/types/user';
 
-export async function generateMetadata(props: AdminUsersPageProps): Promise<Metadata> {
-  return generateAdminUsersMetadata(props);
+type ErrorPayload = {
+  message?: string | string[];
+};
+
+type UsersResult = {
+  data: User[];
+  errorMessage: string | null;
+};
+
+function extractErrorMessage(payload: ErrorPayload | null, fallback: string): string {
+  if (!payload?.message) {
+    return fallback;
+  }
+
+  return Array.isArray(payload.message) ? payload.message.join(', ') : payload.message;
 }
 
-export default async function AdminUsersPage({ params }: AdminUsersPageProps) {
+async function getUsers(
+  apiBaseUrl: string,
+  fallbackErrorMessage: string,
+): Promise<UsersResult> {
+  try {
+    const res = await fetch(`${apiBaseUrl}/users`, {
+      cache: 'no-store',
+    });
+    const payload = (await res.json().catch(() => null)) as User[] | ErrorPayload | null;
+
+    if (!res.ok) {
+      console.error('Failed to fetch users', res.status);
+      return {
+        data: [],
+        errorMessage: extractErrorMessage(payload as ErrorPayload | null, fallbackErrorMessage),
+      };
+    }
+
+    return {
+      data: (payload as User[] | null) ?? [],
+      errorMessage: null,
+    };
+  } catch (error) {
+    console.error('Error fetching users:', error);
+    return {
+      data: [],
+      errorMessage: fallbackErrorMessage,
+    };
+  }
+}
+
+export default async function AdminUsersPage({ params }: { params: Promise<{ lang: string }> }) {
   const { lang } = await params;
   const locale = lang as Locale;
   const usersDict = (await getDictionary(locale, 'users')) as UsersDictionary;
   const d = usersDict.page;
+  const apiBaseUrl = getApiBaseUrl();
 
-  const { data, errorMessage } = await getUsers(d.failedToLoadUsers);
+  const { data, errorMessage } = await getUsers(apiBaseUrl, d.failedToLoadUsers);
 
   return (
     <div className="w-full">
@@ -35,12 +79,7 @@ export default async function AdminUsersPage({ params }: AdminUsersPageProps) {
             {d.totalUsers.replace('{count}', String(data.length))}
           </div>
         </div>
-        <DataTable
-          data={data}
-          dict={usersDict}
-          locale={locale}
-          initialErrorMessage={errorMessage}
-        />
+        <DataTable data={data} dict={usersDict} locale={locale} initialErrorMessage={errorMessage} />
       </div>
     </div>
   );

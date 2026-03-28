@@ -1,67 +1,25 @@
 import type { UsersColumnsDictionary } from './users-dictionary';
 
 import { ColumnDef } from '@tanstack/react-table';
-import {
-  BriefcaseBusiness,
-  ChevronDown,
-  Crown,
-  LoaderCircle,
-  ShieldAlert,
-  ShieldCheck,
-  User as UserIcon,
-  UserRoundX,
-} from 'lucide-react';
+import { BriefcaseBusiness, User as UserIcon } from 'lucide-react';
 
-import { Button } from '@/components/ui/button';
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuGroup,
-  DropdownMenuLabel,
-  DropdownMenuRadioGroup,
-  DropdownMenuRadioItem,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu';
 import { Locale } from '@/i18n-config';
-import { cn } from '@/lib/utils';
-import { PROJECT_TEAM_ROLE_VALUES, User, USER_ROLE_VALUES, UserRole } from '@/types/user';
+import { PROJECT_TEAM_ROLE_VALUES, User, UserRole } from '@/types/user';
+
+import { UserRoleDropdown } from './user-role-dropdown';
 
 interface GetColumnsArgs {
   dict: UsersColumnsDictionary;
   locale: Locale;
-  pendingRoleIds: Set<number>;
-  onRoleChange: (userId: number, nextRole: UserRole) => void;
-}
-
-interface UserRoleDropdownProps {
-  user: User;
-  dict: UsersColumnsDictionary;
-  isSaving: boolean;
-  onRoleChange: (userId: number, nextRole: UserRole) => void;
+  onErrorMessageChange: (message: string | null) => void;
+  onUserRoleChange: (userId: number, nextRole: UserRole) => void;
+  onUserUpdated: (user: User) => void;
 }
 
 const localeByLanguage: Record<Locale, string> = {
   en: 'en-US',
   uk: 'uk-UA',
 };
-
-function isUserRole(value: unknown): value is UserRole {
-  return typeof value === 'string' && USER_ROLE_VALUES.some((role) => role === value);
-}
-
-function getRoleLabel(role: UserRole, dict: UsersColumnsDictionary): string {
-  switch (role) {
-    case 'super_admin':
-      return dict.superAdmin;
-    case 'admin':
-      return dict.admin;
-    case 'unverified_user':
-      return dict.unverifiedUser;
-    case 'user':
-      return dict.userRole;
-  }
-}
 
 function getProjectRoleLabel(
   role: (typeof PROJECT_TEAM_ROLE_VALUES)[number],
@@ -91,110 +49,12 @@ function getProjectRoleLabel(
   }
 }
 
-function getRoleTone(role: UserRole) {
-  switch (role) {
-    case 'super_admin':
-      return {
-        icon: Crown,
-        badgeClassName:
-          'border-rose-500/30 bg-rose-500/10 text-rose-200 hover:border-rose-400/40 hover:bg-rose-500/15',
-        menuIconClassName: 'text-rose-300',
-      };
-    case 'admin':
-      return {
-        icon: ShieldAlert,
-        badgeClassName:
-          'border-amber-500/30 bg-amber-500/10 text-amber-100 hover:border-amber-400/40 hover:bg-amber-500/15',
-        menuIconClassName: 'text-amber-300',
-      };
-    case 'unverified_user':
-      return {
-        icon: UserRoundX,
-        badgeClassName:
-          'border-fuchsia-500/25 bg-fuchsia-500/10 text-fuchsia-100 hover:border-fuchsia-400/40 hover:bg-fuchsia-500/15',
-        menuIconClassName: 'text-fuchsia-300',
-      };
-    case 'user':
-      return {
-        icon: ShieldCheck,
-        badgeClassName:
-          'border-cyan-500/25 bg-cyan-500/10 text-cyan-100 hover:border-cyan-400/40 hover:bg-cyan-500/15',
-        menuIconClassName: 'text-cyan-300',
-      };
-  }
-}
-
-function UserRoleDropdown({ user, dict, isSaving, onRoleChange }: UserRoleDropdownProps) {
-  const roleTone = getRoleTone(user.role);
-  const RoleIcon = roleTone.icon;
-
-  return (
-    <DropdownMenu>
-      <DropdownMenuTrigger
-        disabled={isSaving}
-        render={
-          <Button
-            variant="outline"
-            size="sm"
-            className={cn(
-              'min-w-[180px] justify-between border-white/10 bg-white/5 px-3 text-left text-sm text-white shadow-none transition-colors',
-              roleTone.badgeClassName,
-            )}
-          />
-        }
-      >
-        <span className="flex items-center gap-2">
-          <RoleIcon size={14} />
-          <span>{getRoleLabel(user.role, dict)}</span>
-        </span>
-        {isSaving ? (
-          <span className="flex items-center gap-2 text-xs opacity-80">
-            <LoaderCircle className="size-3.5 animate-spin" />
-            {dict.saving}
-          </span>
-        ) : (
-          <ChevronDown size={14} className="opacity-70" />
-        )}
-      </DropdownMenuTrigger>
-      <DropdownMenuContent align="start" className="w-56">
-        <DropdownMenuGroup>
-          <DropdownMenuLabel>{dict.changeRole}</DropdownMenuLabel>
-        </DropdownMenuGroup>
-        <DropdownMenuSeparator />
-        <DropdownMenuRadioGroup
-          value={user.role}
-          onValueChange={(value) => {
-            if (!isUserRole(value) || value === user.role) {
-              return;
-            }
-
-            onRoleChange(user.id, value);
-          }}
-        >
-          {USER_ROLE_VALUES.map((role) => {
-            const nextRoleTone = getRoleTone(role);
-            const NextRoleIcon = nextRoleTone.icon;
-
-            return (
-              <DropdownMenuRadioItem key={role} value={role} disabled={isSaving} closeOnClick>
-                <span className="flex items-center gap-2">
-                  <NextRoleIcon size={14} className={nextRoleTone.menuIconClassName} />
-                  <span>{getRoleLabel(role, dict)}</span>
-                </span>
-              </DropdownMenuRadioItem>
-            );
-          })}
-        </DropdownMenuRadioGroup>
-      </DropdownMenuContent>
-    </DropdownMenu>
-  );
-}
-
 export const getColumns = ({
   dict,
   locale,
-  pendingRoleIds,
-  onRoleChange,
+  onErrorMessageChange,
+  onUserRoleChange,
+  onUserUpdated,
 }: GetColumnsArgs): ColumnDef<User>[] => [
   {
     accessorKey: 'id',
@@ -228,8 +88,9 @@ export const getColumns = ({
       <UserRoleDropdown
         user={row.original}
         dict={dict}
-        isSaving={pendingRoleIds.has(row.original.id)}
-        onRoleChange={onRoleChange}
+        onErrorMessageChange={onErrorMessageChange}
+        onUserRoleChange={onUserRoleChange}
+        onUserUpdated={onUserUpdated}
       />
     ),
   },

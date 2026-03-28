@@ -3,7 +3,7 @@
 import type { UsersDictionary } from './users-dictionary';
 
 import { flexRender, getCoreRowModel, useReactTable } from '@tanstack/react-table';
-import React, { startTransition, useEffect } from 'react';
+import React, { startTransition } from 'react';
 
 import {
   Table,
@@ -14,7 +14,6 @@ import {
   TableRow,
 } from '@/components/ui/table';
 import { Locale } from '@/i18n-config';
-import { updateUserRole } from '@/lib/mutations/update-user-role';
 import { User, UserRole } from '@/types/user';
 
 import { getColumns } from './columns';
@@ -28,50 +27,30 @@ interface DataTableProps {
 
 export function DataTable({ data, dict, locale, initialErrorMessage = null }: DataTableProps) {
   const [users, setUsers] = React.useState<User[]>(data);
-  const [pendingRoleIds, setPendingRoleIds] = React.useState<number[]>([]);
   const [errorMessage, setErrorMessage] = React.useState<string | null>(initialErrorMessage);
 
-  useEffect(() => {
-    setErrorMessage(initialErrorMessage);
-  }, [initialErrorMessage]);
-
-  const handleRoleChange = async (userId: number, nextRole: UserRole) => {
-    const previousUser = users.find((user) => user.id === userId);
-
-    if (!previousUser || previousUser.role === nextRole) {
-      return;
-    }
-
-    setErrorMessage(null);
-    setPendingRoleIds((current) => (current.includes(userId) ? current : [...current, userId]));
+  const handleUserRoleChange = (userId: number, nextRole: UserRole) => {
     startTransition(() => {
       setUsers((current) =>
         current.map((user) => (user.id === userId ? { ...user, role: nextRole } : user)),
       );
     });
+  };
 
-    try {
-      const updatedUser = await updateUserRole(userId, nextRole);
-      React.startTransition(() => {
-        setUsers((current) => current.map((user) => (user.id === userId ? updatedUser : user)));
-      });
-    } catch (error) {
-      React.startTransition(() => {
-        setUsers((current) =>
-          current.map((user) => (user.id === userId ? { ...user, role: previousUser.role } : user)),
-        );
-      });
-      setErrorMessage(error instanceof Error ? error.message : dict.page.failedToUpdateRole);
-    } finally {
-      setPendingRoleIds((current) => current.filter((id) => id !== userId));
-    }
+  const handleUserUpdated = (updatedUser: User) => {
+    startTransition(() => {
+      setUsers((current) =>
+        current.map((user) => (user.id === updatedUser.id ? updatedUser : user)),
+      );
+    });
   };
 
   const columns = getColumns({
     dict: dict.columns,
     locale,
-    pendingRoleIds: new Set(pendingRoleIds),
-    onRoleChange: handleRoleChange,
+    onErrorMessageChange: setErrorMessage,
+    onUserRoleChange: handleUserRoleChange,
+    onUserUpdated: handleUserUpdated,
   });
 
   const table = useReactTable({

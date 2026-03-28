@@ -23,10 +23,7 @@ function extractErrorMessage(payload: ErrorPayload | null, fallback: string): st
   return Array.isArray(payload.message) ? payload.message.join(', ') : payload.message;
 }
 
-async function getUsers(
-  apiBaseUrl: string,
-  fallbackErrorMessage: string,
-): Promise<UsersResult> {
+async function getUsers(apiBaseUrl: string, fallbackErrorMessage: string): Promise<UsersResult> {
   try {
     const res = await fetch(`${apiBaseUrl}/users`, {
       cache: 'no-store',
@@ -79,7 +76,12 @@ export default async function AdminUsersPage({ params }: { params: Promise<{ lan
             {d.totalUsers.replace('{count}', String(data.length))}
           </div>
         </div>
-        <DataTable data={data} dict={usersDict} locale={locale} initialErrorMessage={errorMessage} />
+        <DataTable
+          data={data}
+          dict={usersDict}
+          locale={locale}
+          initialErrorMessage={errorMessage}
+        />
       </div>
     </div>
   );

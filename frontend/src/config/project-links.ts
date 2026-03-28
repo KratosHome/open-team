@@ -231,11 +231,10 @@ export const socialLinks: Array<{
   },
 ];
 
-const projectLinkMap = Object.fromEntries(
-  projectLinks.map((link) => [link.key, link]),
-) as Record<ProjectLinkKey, ProjectLinkInfo>;
-
-export const getProjectLink = (key: ProjectLinkKey) => projectLinkMap[key];
+const projectLinkMap = Object.fromEntries(projectLinks.map((link) => [link.key, link])) as Record<
+  ProjectLinkKey,
+  ProjectLinkInfo
+>;
 
 export const getProjectHref = (lang: Locale, key: ProjectLinkKey) =>
   `/${lang}${projectLinkMap[key].path}`;

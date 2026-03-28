@@ -1,6 +1,5 @@
 import type { ElementType } from 'react';
-
-import { LucideIcon } from 'lucide-react';
+import type { LucideIcon } from 'lucide-react';
 
 import { MyLink } from '@/components/ui/my-link';
 

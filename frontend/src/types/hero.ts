@@ -1,4 +1,21 @@
-import { LandingStats } from '@/data/landing-stats';
+import type { LandingStats } from '@/data/landing-stats';
+
+export interface HeroStatsDictionary {
+  projects: string;
+  participants: string;
+  completed: string;
+}
+
+export interface HeroStepsDictionary {
+  step1Title: string;
+  step1Description: string;
+  step2Title: string;
+  step2Description: string;
+  step3Title: string;
+  step3Description: string;
+  step4Title: string;
+  step4Description: string;
+}
 
 export interface HeroDictionary {
   activeProjects: string;
@@ -9,22 +26,9 @@ export interface HeroDictionary {
   heroDescription: string;
   createProject: string;
   selectProject: string;
-  stats: {
-    projects: string;
-    participants: string;
-    completed: string;
-  };
+  stats: HeroStatsDictionary;
   howItWorks: string;
-  steps: {
-    step1Title: string;
-    step1Description: string;
-    step2Title: string;
-    step2Description: string;
-    step3Title: string;
-    step3Description: string;
-    step4Title: string;
-    step4Description: string;
-  };
+  steps: HeroStepsDictionary;
 }
 
 export interface HeroSectionProps {

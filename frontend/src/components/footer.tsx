@@ -19,34 +19,38 @@ import {
 } from '@/config/project-links';
 import gsap from 'gsap';
 
+interface FooterDictionaryContent {
+  description: string;
+  platform: string;
+  projects: string;
+  community: string;
+  tokenomics: string;
+  documentation: string;
+  company: string;
+  blog: string;
+  rules: string;
+  faq: string;
+  about: string;
+  support: string;
+  contact: string;
+  reportBug: string;
+  partnership: string;
+  pressKit: string;
+  stayInTouch: string;
+  subscribeDescription: string;
+  emailPlaceholder: string;
+  subscribe: string;
+  copyright: string;
+  privacyPolicy: string;
+  termsOfUse: string;
+}
+
+interface FooterDictionary {
+  footer: FooterDictionaryContent;
+}
+
 interface FooterProps {
-  dict: {
-    footer: {
-      description: string;
-      platform: string;
-      projects: string;
-      community: string;
-      tokenomics: string;
-      documentation: string;
-      company: string;
-      blog: string;
-      rules: string;
-      faq: string;
-      about: string;
-      support: string;
-      contact: string;
-      reportBug: string;
-      partnership: string;
-      pressKit: string;
-      stayInTouch: string;
-      subscribeDescription: string;
-      emailPlaceholder: string;
-      subscribe: string;
-      copyright: string;
-      privacyPolicy: string;
-      termsOfUse: string;
-    };
-  };
+  dict: FooterDictionary;
   lang: Locale;
 }
 

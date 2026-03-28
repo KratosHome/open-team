@@ -1,18 +1,24 @@
 import type { ReactNode } from 'react';
+import type { Locale } from '@/i18n-config';
 
 import Link from 'next/link';
 import { FileText, LayoutDashboard, LogOut, Settings, Users } from 'lucide-react';
 
-import { Locale } from '@/i18n-config';
 import { getDictionary } from '@/lib/get-dictionary';
+
+interface LangParams {
+  lang: string;
+}
+
+interface AdminLayoutProps {
+  children: ReactNode;
+  params: Promise<LangParams>;
+}
 
 export default async function AdminLayout({
   children,
   params,
-}: {
-  children: ReactNode;
-  params: Promise<{ lang: string }>;
-}) {
+}: AdminLayoutProps) {
   const { lang } = await params;
   const locale = lang as Locale;
   const adminDict = await getDictionary(locale, 'admin');

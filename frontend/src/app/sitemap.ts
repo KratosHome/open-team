@@ -1,6 +1,11 @@
-import { MetadataRoute } from 'next';
+import type { MetadataRoute } from 'next';
 
-import { getAbsoluteProjectUrl, getLocaleAlternates, getSitemapLinks, siteLinksConfig } from '@/config/project-links';
+import {
+  getAbsoluteProjectUrl,
+  getLocaleAlternates,
+  getSitemapLinks,
+  siteLinksConfig,
+} from '@/config/project-links';
 import { i18n } from '@/i18n-config';
 
 export default function sitemap(): MetadataRoute.Sitemap {

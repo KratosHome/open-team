@@ -10,7 +10,7 @@ import { useRef } from 'react';
 import { getProjectHref } from '@/config/project-links';
 import gsap from 'gsap';
 
-import { StepCard } from './StepCard';
+import { StepCard } from './step-card';
 
 interface TokenSystemSectionProps {
   dict: TokenSystemDictionary;

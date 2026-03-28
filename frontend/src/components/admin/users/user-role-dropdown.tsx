@@ -1,6 +1,7 @@
 'use client';
 
 import type { UsersColumnsDictionary } from './users-dictionary';
+import type { User, UserRole } from '@/types/user';
 
 import {
   ChevronDown,
@@ -23,7 +24,7 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { cn } from '@/lib/utils';
-import { User, UserRole, USER_ROLE_VALUES } from '@/types/user';
+import { USER_ROLE_VALUES } from '@/types/user';
 
 import { useUpdateUserRoleMutation } from './use-update-user-role-mutation';
 

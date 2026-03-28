@@ -17,8 +17,8 @@ import {
 } from '@/config/project-links';
 import { i18n } from '@/i18n-config';
 import { getDictionary } from '@/lib/get-dictionary';
-import { GSAPProvider } from '@/providers/GSAPProvider';
-import { ReactQueryProvider } from '@/providers/ReactQueryProvider';
+import { GSAPProvider } from '@/providers/gsap-provider';
+import { ReactQueryProvider } from '@/providers/react-query-provider';
 
 const Footer = dynamic(() => import('@/components/footer').then((mod) => mod.Footer), {
   ssr: true,
@@ -43,15 +43,25 @@ export const viewport: Viewport = {
   maximumScale: 5,
 };
 
+interface LangParams {
+  lang: string;
+}
+
+interface GenerateMetadataProps {
+  params: Promise<LangParams>;
+}
+
+interface RootLayoutProps extends GenerateMetadataProps {
+  children: ReactNode;
+}
+
 export async function generateStaticParams() {
   return i18n.locales.map((locale) => ({ lang: locale }));
 }
 
 export async function generateMetadata({
   params,
-}: {
-  params: Promise<{ lang: string }>;
-}): Promise<Metadata> {
+}: GenerateMetadataProps): Promise<Metadata> {
   const { lang } = await params;
   const locale = lang as Locale;
   const dict = await getDictionary(locale, 'main');
@@ -88,10 +98,7 @@ export async function generateMetadata({
 export default async function RootLayout({
   children,
   params,
-}: {
-  children: ReactNode;
-  params: Promise<{ lang: string }>;
-}) {
+}: RootLayoutProps) {
   const { lang } = await params;
   const locale = lang as Locale;
   const dict = await getDictionary(locale, 'common');

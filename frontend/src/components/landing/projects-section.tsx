@@ -1,14 +1,15 @@
 'use client';
 
+import type { ProjectsSectionProps } from '@/types/projects';
+
 import { useGSAP } from '@gsap/react';
 import { Zap } from 'lucide-react';
 import { useRef } from 'react';
 
 import { Button } from '@/components/ui/button';
-import { ProjectsSectionProps } from '@/types/projects';
 import gsap from 'gsap';
 
-import { ProjectCard } from './ProjectCard';
+import { ProjectCard } from './project-card';
 
 export function ProjectsSection({ dict, projects }: ProjectsSectionProps) {
   const containerRef = useRef<HTMLDivElement>(null);

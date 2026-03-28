@@ -1,12 +1,13 @@
 'use client';
 
+import type { HeroSectionProps } from '@/types/hero';
+
 import { Coins, Lightbulb, MoveRight, Rocket, Zap } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
-import { HeroSectionProps } from '@/types/hero';
 
-import { StatCard } from './StatCard';
-import { StepCard } from './StepCard';
+import { StatCard } from './stat-card';
+import { StepCard } from './step-card';
 
 export const HeroSection = ({ dict, stats }: HeroSectionProps) => {
   return (

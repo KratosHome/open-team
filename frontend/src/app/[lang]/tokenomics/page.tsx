@@ -3,6 +3,22 @@ import Link from 'next/link';
 import { getProjectHref } from '@/config/project-links';
 import type { Locale } from '@/i18n-config';
 
+interface TokenomicsPageContent {
+  eyebrow: string;
+  title: string;
+  description: string;
+  points: string[];
+  backLabel: string;
+}
+
+interface LangParams {
+  lang: string;
+}
+
+interface TokenomicsPageProps {
+  params: Promise<LangParams>;
+}
+
 const tokenomicsContent = {
   en: {
     eyebrow: 'Tokenomics',
@@ -28,13 +44,11 @@ const tokenomicsContent = {
     ],
     backLabel: 'Повернутися на головну',
   },
-} as const;
+} as const satisfies Record<Locale, TokenomicsPageContent>;
 
 export default async function TokenomicsPage({
   params,
-}: {
-  params: Promise<{ lang: string }>;
-}) {
+}: TokenomicsPageProps) {
   const { lang } = await params;
   const locale = lang as Locale;
   const content = tokenomicsContent[locale];

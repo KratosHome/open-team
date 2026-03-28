@@ -14,8 +14,8 @@ import { Logo } from '@/components/ui/logo';
 import { MyLink } from '@/components/ui/my-link';
 import { getNavigationLinks } from '@/config/navigation';
 import { getProjectHref } from '@/config/project-links';
-import { Locale } from '@/i18n-config';
 import { cn } from '@/lib/utils';
+import type { Locale } from '@/i18n-config';
 
 interface NavbarDictionary extends AuthDialogDictionary {
   navbar: Record<string, string>;

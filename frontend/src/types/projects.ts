@@ -1,4 +1,4 @@
-import { Project } from '@/data/projects';
+import type { Project } from '@/data/projects';
 
 export interface ProjectsDictionary {
   title: string;

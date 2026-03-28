@@ -1,10 +1,11 @@
 'use client';
 
+import type { ProjectCardProps } from '@/types/projects';
+
 import { ArrowRight, Calendar, Clock, TrendingUp, Users, Zap } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
-import { ProjectCardProps } from '@/types/projects';
 
 export function ProjectCard({ project, dict }: ProjectCardProps) {
   const progressPercent = (project.funding.current / project.funding.target) * 100;

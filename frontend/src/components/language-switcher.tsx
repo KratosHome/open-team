@@ -9,9 +9,14 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import { i18n, Locale } from '@/i18n-config';
+import { i18n } from '@/i18n-config';
+import type { Locale } from '@/i18n-config';
 
-export function LanguageSwitcher({ lang }: { lang: Locale }) {
+interface LanguageSwitcherProps {
+  lang: Locale;
+}
+
+export function LanguageSwitcher({ lang }: LanguageSwitcherProps) {
   const router = useRouter();
   const pathname = usePathname();
 

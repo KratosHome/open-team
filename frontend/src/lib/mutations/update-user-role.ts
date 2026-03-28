@@ -1,10 +1,10 @@
 'use server';
 
 import type { ErrorMessagePayload } from '@/lib/extract-error-message';
+import type { User, UserRole } from '@/types/user';
 
 import { extractErrorMessage } from '@/lib/extract-error-message';
 import { getApiBaseUrl } from '@/lib/get-api-base-url';
-import { User, UserRole } from '@/types/user';
 
 export async function updateUserRole(userId: number, role: UserRole): Promise<User> {
   const response = await fetch(`${getApiBaseUrl()}/users/${userId}/role`, {

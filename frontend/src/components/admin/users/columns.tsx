@@ -1,10 +1,9 @@
 import type { UsersColumnsDictionary } from './users-dictionary';
+import type { ColumnDef } from '@tanstack/react-table';
+import type { Locale } from '@/i18n-config';
+import type { ProjectTeamRole, User, UserRole } from '@/types/user';
 
-import { ColumnDef } from '@tanstack/react-table';
 import { BriefcaseBusiness, User as UserIcon } from 'lucide-react';
-
-import { Locale } from '@/i18n-config';
-import { PROJECT_TEAM_ROLE_VALUES, User, UserRole } from '@/types/user';
 
 import { UserRoleDropdown } from './user-role-dropdown';
 
@@ -22,7 +21,7 @@ const localeByLanguage: Record<Locale, string> = {
 };
 
 function getProjectRoleLabel(
-  role: (typeof PROJECT_TEAM_ROLE_VALUES)[number],
+  role: ProjectTeamRole,
   dict: UsersColumnsDictionary,
 ): string {
   switch (role) {

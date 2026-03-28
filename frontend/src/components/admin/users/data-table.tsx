@@ -1,9 +1,11 @@
 'use client';
 
 import type { UsersDictionary } from './users-dictionary';
+import type { Locale } from '@/i18n-config';
+import type { User, UserRole } from '@/types/user';
 
 import { flexRender, getCoreRowModel, useReactTable } from '@tanstack/react-table';
-import React, { startTransition } from 'react';
+import { startTransition, useState } from 'react';
 
 import {
   Table,
@@ -13,8 +15,6 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table';
-import { Locale } from '@/i18n-config';
-import { User, UserRole } from '@/types/user';
 
 import { getColumns } from './columns';
 
@@ -26,8 +26,8 @@ interface DataTableProps {
 }
 
 export function DataTable({ data, dict, locale, initialErrorMessage = null }: DataTableProps) {
-  const [users, setUsers] = React.useState<User[]>(data);
-  const [errorMessage, setErrorMessage] = React.useState<string | null>(initialErrorMessage);
+  const [users, setUsers] = useState<User[]>(data);
+  const [errorMessage, setErrorMessage] = useState<string | null>(initialErrorMessage);
 
   const handleUserRoleChange = (userId: number, nextRole: UserRole) => {
     startTransition(() => {

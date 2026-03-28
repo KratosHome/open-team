@@ -44,6 +44,17 @@ export interface ProjectLinkInfo {
   inSitemap: boolean;
 }
 
+export interface FooterSection {
+  titleKey: FooterSectionKey;
+  linkKeys: ProjectLinkKey[];
+}
+
+export interface SocialLink {
+  key: SocialLinkKey;
+  href: string;
+  label: string;
+}
+
 export const projectLinks: ProjectLinkInfo[] = [
   {
     key: 'home',
@@ -189,10 +200,7 @@ export const projectLinks: ProjectLinkInfo[] = [
   },
 ];
 
-export const footerSections: Array<{
-  titleKey: FooterSectionKey;
-  linkKeys: ProjectLinkKey[];
-}> = [
+export const footerSections: FooterSection[] = [
   {
     titleKey: 'platform',
     linkKeys: ['projects', 'community', 'tokenomics', 'documentation'],
@@ -209,11 +217,7 @@ export const footerSections: Array<{
 
 export const footerLegalLinkKeys: ProjectLinkKey[] = ['privacy', 'terms'];
 
-export const socialLinks: Array<{
-  key: SocialLinkKey;
-  href: string;
-  label: string;
-}> = [
+export const socialLinks: SocialLink[] = [
   {
     key: 'x',
     href: '#',

@@ -27,13 +27,13 @@ const Footer = dynamic(() => import('@/components/footer').then((mod) => mod.Foo
 const inter = Inter({
   subsets: ['latin', 'cyrillic'],
   variable: '--font-inter',
-  display: 'optional',
+  display: 'swap',
 });
 
 const geistMono = Geist_Mono({
   subsets: ['latin'],
   variable: '--font-geist-mono',
-  display: 'optional',
+  display: 'swap',
 });
 
 export const viewport: Viewport = {

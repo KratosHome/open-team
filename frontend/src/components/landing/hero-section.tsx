@@ -1,5 +1,3 @@
-'use client';
-
 import type { HeroSectionProps } from '@/types/hero';
 
 import { Coins, Lightbulb, MoveRight, Rocket, Zap } from 'lucide-react';
@@ -38,14 +36,14 @@ export const HeroSection = ({ dict, stats }: HeroSectionProps) => {
 
           <p
             className="hero-description animate-hero-up max-w-lg text-lg leading-relaxed text-white/40"
-            style={{ animationDelay: '400ms' }}
+            style={{ animationDelay: '200ms' }}
           >
             {dict.heroDescription}
           </p>
 
           <div
             className="hero-buttons animate-hero-up flex flex-wrap gap-4"
-            style={{ animationDelay: '600ms' }}
+            style={{ animationDelay: '300ms' }}
           >
             <Button variant="success" size="xl">
               {dict.createProject}
@@ -60,7 +58,7 @@ export const HeroSection = ({ dict, stats }: HeroSectionProps) => {
 
           <div
             className="hero-stats animate-hero-up mt-8 flex flex-wrap gap-4"
-            style={{ animationDelay: '800ms' }}
+            style={{ animationDelay: '500ms' }}
           >
             <StatCard value={stats.activeProjects.toString()} sublabel={dict.stats.projects} />
             <StatCard value={stats.participants.toString()} sublabel={dict.stats.participants} />
@@ -70,7 +68,7 @@ export const HeroSection = ({ dict, stats }: HeroSectionProps) => {
 
         <div
           className="hero-steps animate-hero-left relative flex flex-col gap-6 pt-4"
-          style={{ animationDelay: '800ms' }}
+          style={{ animationDelay: '500ms' }}
         >
           <div className="flex justify-start md:justify-end">
             <h2 className="rounded-md bg-[#00ffa2]/10 px-3 py-1 text-[10px] font-bold tracking-[0.2em] text-[#00ffa2] uppercase">

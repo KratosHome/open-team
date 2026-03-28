@@ -5,26 +5,11 @@ import type { ProjectsDictionary } from '@/types/projects';
 import type { TokenSystemDictionary } from '@/types/token-system';
 
 import { HeroSection } from '@/components/landing/hero-section';
+import { ProjectsSection } from '@/components/landing/projects-section';
+import { TokenSystemSection } from '@/components/landing/token-system-section';
 import { mockLandingStats } from '@/data/landing-stats';
 import { mockProjects } from '@/data/projects';
 import { getDictionary } from '@/lib/get-dictionary';
-
-const ProjectsSection = dynamic(
-  () => import('@/components/landing/projects-section').then((mod) => mod.ProjectsSection),
-  {
-    ssr: true,
-    loading: () => <div className="min-h-[400px]" />,
-  },
-);
-
-const TokenSystemSection = dynamic(
-  () =>
-    import('@/components/landing/token-system-section').then((mod) => mod.TokenSystemSection),
-  {
-    ssr: true,
-    loading: () => <div className="min-h-[400px]" />,
-  },
-);
 
 interface LangParams {
   lang: string;

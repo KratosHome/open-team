@@ -5,14 +5,32 @@
     "description": "Переглядайте, редагуйте та координуйте всіх зареєстрованих учасників платформи OpenTeam.",
     "directory": "Каталог користувачів",
     "totalUsers": "Всього користувачів: {count}",
-    "noUsersFound": "Користувачів не знайдено."
+    "noUsersFound": "Користувачів не знайдено.",
+    "failedToLoadUsers": "Не вдалося завантажити список користувачів.",
+    "failedToUpdateRole": "Не вдалося оновити роль користувача."
   },
   "columns": {
     "id": "ID",
     "user": "Користувач",
-    "accessLevel": "Рівень доступу",
+    "accessLevel": "Системна роль",
+    "projectRoles": "Командні ролі",
     "joinedDate": "Дата реєстрації",
+    "changeRole": "Змінити роль",
+    "saving": "Збереження...",
+    "superAdmin": "Суперадмін",
     "admin": "Адмін",
-    "mod": "Мод"
+    "userRole": "Користувач",
+    "unverifiedUser": "Непідтверджений",
+    "noProjectRoles": "Немає ролей",
+    "projectOwner": "Власник проєкту",
+    "projectCreator": "Автор проєкту",
+    "projectManager": "Менеджер проєкту",
+    "designer": "Дизайнер",
+    "developer": "Розробник",
+    "frontendDeveloper": "Frontend розробник",
+    "backendDeveloper": "Backend розробник",
+    "qa": "QA",
+    "marketer": "Маркетолог",
+    "businessAnalyst": "Бізнес-аналітик"
   }
 }

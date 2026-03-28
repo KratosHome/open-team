@@ -5,14 +5,32 @@
     "description": "View, edit, and orchestrate all registered participants across the OpenTeam platform.",
     "directory": "Users Directory",
     "totalUsers": "{count} Total Users",
-    "noUsersFound": "No users found."
+    "noUsersFound": "No users found.",
+    "failedToLoadUsers": "Failed to load the users list.",
+    "failedToUpdateRole": "Failed to update the user role."
   },
   "columns": {
     "id": "ID",
     "user": "User",
-    "accessLevel": "Access Level",
+    "accessLevel": "System Role",
+    "projectRoles": "Project Roles",
     "joinedDate": "Joined Date",
+    "changeRole": "Change role",
+    "saving": "Saving...",
+    "superAdmin": "Super Admin",
     "admin": "Admin",
-    "mod": "Mod"
+    "userRole": "User",
+    "unverifiedUser": "Unverified",
+    "noProjectRoles": "No project roles",
+    "projectOwner": "Project Owner",
+    "projectCreator": "Project Creator",
+    "projectManager": "Project Manager",
+    "designer": "Designer",
+    "developer": "Developer",
+    "frontendDeveloper": "Frontend Developer",
+    "backendDeveloper": "Backend Developer",
+    "qa": "QA",
+    "marketer": "Marketer",
+    "businessAnalyst": "Business Analyst"
   }
 }

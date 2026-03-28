@@ -1,4 +1,5 @@
 import {
+  Patch,
   Body,
   Controller,
   Get,
@@ -19,6 +20,7 @@ import {
 import { HttpErrorResponseDto } from '../common/dto/http-error-response.dto';
 import { ValidationErrorResponseDto } from '../common/dto/validation-error-response.dto';
 import { CreateUserDto } from './dto/create-user.dto';
+import { UpdateUserRoleDto } from './dto/update-user-role.dto';
 import { UserResponseDto } from './dto/user-response.dto';
 import { UsersService } from './users.service';
 
@@ -84,6 +86,35 @@ export class UsersController {
     @Param('id', ParseIntPipe) id: number,
   ): Promise<UserResponseDto> {
     const user = await this.usersService.findOne(id);
+
+    return UserResponseDto.fromEntity(user);
+  }
+
+  @ApiOperation({ summary: 'Update a user role' })
+  @ApiParam({
+    name: 'id',
+    description: 'User identifier.',
+    type: Number,
+    example: 1,
+  })
+  @ApiOkResponse({
+    description: 'User role updated successfully.',
+    type: UserResponseDto,
+  })
+  @ApiBadRequestResponse({
+    description: 'The provided id or role is invalid.',
+    type: ValidationErrorResponseDto,
+  })
+  @ApiNotFoundResponse({
+    description: 'User not found.',
+    type: HttpErrorResponseDto,
+  })
+  @Patch(':id/role')
+  async updateRole(
+    @Param('id', ParseIntPipe) id: number,
+    @Body() updateUserRoleDto: UpdateUserRoleDto,
+  ): Promise<UserResponseDto> {
+    const user = await this.usersService.updateRole(id, updateUserRoleDto.role);
 
     return UserResponseDto.fromEntity(user);
   }

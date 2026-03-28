@@ -68,6 +68,14 @@ export class UsersService {
     return user;
   }
 
+  async updateRole(id: number, role: UserRole): Promise<User> {
+    const user = await this.findOne(id);
+
+    user.role = role;
+
+    return this.usersRepository.save(user);
+  }
+
   private isDuplicateEmailError(error: unknown): boolean {
     if (typeof error !== 'object' || error === null) {
       return false;

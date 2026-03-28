@@ -9,8 +9,19 @@ import { AppModule } from './../src/app.module';
 import { Reflector } from '@nestjs/core';
 import { UserRole } from './../src/users/enums/user-role.enum';
 
+type UserResponse = {
+  id: number;
+  name: string;
+  email: string;
+  role: UserRole;
+  projectRoles: string[];
+  createdAt: string;
+  updatedAt: string;
+};
+
 describe('UsersController (e2e)', () => {
   let app: INestApplication;
+  let httpServer: Parameters<typeof request>[0];
 
   beforeAll(async () => {
     const moduleFixture: TestingModule = await Test.createTestingModule({
@@ -29,6 +40,7 @@ describe('UsersController (e2e)', () => {
       new ClassSerializerInterceptor(app.get(Reflector)),
     );
     await app.init();
+    httpServer = app.getHttpServer() as Parameters<typeof request>[0];
   });
 
   afterAll(async () => {
@@ -42,31 +54,55 @@ describe('UsersController (e2e)', () => {
       password: 'password123',
     };
 
-    const response = await request(app.getHttpServer())
+    const response = await request(httpServer)
       .post('/users')
       .send(createUserDto)
       .expect(201);
+    const body = response.body as UserResponse;
 
-    expect(response.body).toHaveProperty('id');
-    expect(response.body.name).toBe(createUserDto.name);
-    expect(response.body.email).toBe(createUserDto.email);
-    expect(response.body.role).toBe(UserRole.USER);
-    expect(response.body.projectRoles).toEqual([]);
-    expect(response.body).not.toHaveProperty('password');
-    expect(response.body).toHaveProperty('createdAt');
-    expect(response.body).toHaveProperty('updatedAt');
+    expect(body).toHaveProperty('id');
+    expect(body.name).toBe(createUserDto.name);
+    expect(body.email).toBe(createUserDto.email);
+    expect(body.role).toBe(UserRole.USER);
+    expect(body.projectRoles).toEqual([]);
+    expect(body).not.toHaveProperty('password');
+    expect(body).toHaveProperty('createdAt');
+    expect(body).toHaveProperty('updatedAt');
   });
 
   it('/users (GET) should return users without passwords', async () => {
-    const response = await request(app.getHttpServer())
-      .get('/users')
-      .expect(200);
+    const response = await request(httpServer).get('/users').expect(200);
+    const body = response.body as UserResponse[];
 
-    expect(Array.isArray(response.body)).toBe(true);
-    if (response.body.length > 0) {
-      expect(response.body[0]).not.toHaveProperty('password');
-      expect(response.body[0]).toHaveProperty('role');
-      expect(response.body[0]).toHaveProperty('projectRoles');
+    expect(Array.isArray(body)).toBe(true);
+    if (body.length > 0) {
+      expect(body[0]).not.toHaveProperty('password');
+      expect(body[0]).toHaveProperty('role');
+      expect(body[0]).toHaveProperty('projectRoles');
     }
+  });
+
+  it('/users/:id/role (PATCH) should update the user role', async () => {
+    const createUserDto = {
+      name: 'Role Switch User',
+      email: 'role-switch@example.com',
+      password: 'password123',
+    };
+
+    const createdResponse = await request(httpServer)
+      .post('/users')
+      .send(createUserDto)
+      .expect(201);
+    const createdUser = createdResponse.body as UserResponse;
+
+    const updateResponse = await request(httpServer)
+      .patch(`/users/${createdUser.id}/role`)
+      .send({ role: UserRole.ADMIN })
+      .expect(200);
+    const updatedUser = updateResponse.body as UserResponse;
+
+    expect(updatedUser.id).toBe(createdUser.id);
+    expect(updatedUser.role).toBe(UserRole.ADMIN);
+    expect(updatedUser.email).toBe(createUserDto.email);
   });
 });

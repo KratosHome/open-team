@@ -22,7 +22,7 @@ function extractErrorMessage(payload: ErrorPayload | null, fallback: string): st
 
   return Array.isArray(payload.message) ? payload.message.join(', ') : payload.message;
 }
-
+//
 async function getUsers(apiBaseUrl: string, fallbackErrorMessage: string): Promise<UsersResult> {
   try {
     const res = await fetch(`${apiBaseUrl}/users`, {

@@ -1,73 +1,22 @@
-import type { UsersDictionary } from '@/components/admin/users/users-dictionary';
+import type { AdminUsersPageProps } from '@/components/admin/users/users-page.types';
 
 import { DataTable } from '@/components/admin/users/data-table';
-import { Locale } from '@/i18n-config';
-import { getApiBaseUrl } from '@/lib/get-api-base-url';
-import { getDictionary } from '@/lib/get-dictionary';
-import { User } from '@/types/user';
+import { AdminUsersPageHeader } from '@/components/admin/users/users-page-header';
+import { getAdminUsersPageData } from '@/components/admin/users/users-page.data';
+import { generateAdminUsersMetadata } from '@/components/admin/users/users-page.metadata';
 
-type ErrorPayload = {
-  message?: string | string[];
-};
-
-type UsersResult = {
-  data: User[];
-  errorMessage: string | null;
-};
-
-function extractErrorMessage(payload: ErrorPayload | null, fallback: string): string {
-  if (!payload?.message) {
-    return fallback;
-  }
-
-  return Array.isArray(payload.message) ? payload.message.join(', ') : payload.message;
-}
-//
-async function getUsers(apiBaseUrl: string, fallbackErrorMessage: string): Promise<UsersResult> {
-  try {
-    const res = await fetch(`${apiBaseUrl}/users`, {
-      cache: 'no-store',
-    });
-    const payload = (await res.json().catch(() => null)) as User[] | ErrorPayload | null;
-
-    if (!res.ok) {
-      console.error('Failed to fetch users', res.status);
-      return {
-        data: [],
-        errorMessage: extractErrorMessage(payload as ErrorPayload | null, fallbackErrorMessage),
-      };
-    }
-
-    return {
-      data: (payload as User[] | null) ?? [],
-      errorMessage: null,
-    };
-  } catch (error) {
-    console.error('Error fetching users:', error);
-    return {
-      data: [],
-      errorMessage: fallbackErrorMessage,
-    };
-  }
+export async function generateMetadata(props: AdminUsersPageProps) {
+  return generateAdminUsersMetadata(props);
 }
 
-export default async function AdminUsersPage({ params }: { params: Promise<{ lang: string }> }) {
-  const { lang } = await params;
-  const locale = lang as Locale;
-  const usersDict = (await getDictionary(locale, 'users')) as UsersDictionary;
+export default async function AdminUsersPage(props: AdminUsersPageProps) {
+  const { locale, usersDict, usersResult } = await getAdminUsersPageData(props);
+  const { data, errorMessage } = usersResult;
   const d = usersDict.page;
-  const apiBaseUrl = getApiBaseUrl();
-
-  const { data, errorMessage } = await getUsers(apiBaseUrl, d.failedToLoadUsers);
 
   return (
     <div className="w-full">
-      <div className="animate-hero-left mb-10">
-        <h1 className="mb-3 text-4xl font-extrabold tracking-tight text-white md:text-5xl">
-          {d.title} <span className="text-gradient-cyan">{d.titleHighlight}</span>
-        </h1>
-        <p className="max-w-2xl text-lg leading-relaxed text-slate-400">{d.description}</p>
-      </div>
+      <AdminUsersPageHeader dict={d} />
 
       <div className="glass animate-hero-up animation-delay-200 rounded-2xl border border-white/10 p-6 md:p-8">
         <div className="mb-6 flex items-center justify-between">
@@ -79,8 +28,8 @@ export default async function AdminUsersPage({ params }: { params: Promise<{ lan
         <DataTable
           data={data}
           dict={usersDict}
-          locale={locale}
           initialErrorMessage={errorMessage}
+          locale={locale}
         />
       </div>
     </div>

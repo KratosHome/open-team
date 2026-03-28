@@ -9,7 +9,7 @@ import { AppModule } from './../src/app.module';
 import { Reflector } from '@nestjs/core';
 import { UserRole } from './../src/users/enums/user-role.enum';
 
-type UserResponse = {
+interface UserResponse {
   id: number;
   name: string;
   email: string;
@@ -17,7 +17,7 @@ type UserResponse = {
   projectRoles: string[];
   createdAt: string;
   updatedAt: string;
-};
+}
 
 describe('UsersController (e2e)', () => {
   let app: INestApplication;

@@ -1,9 +1,10 @@
 'use client';
 
 import type { UsersDictionary } from './users-dictionary';
+import type { ErrorMessagePayload } from '@/lib/extract-error-message';
 
 import { flexRender, getCoreRowModel, useReactTable } from '@tanstack/react-table';
-import React, { startTransition, useEffect } from 'react';
+import { startTransition, useState } from 'react';
 
 import {
   Table,
@@ -14,6 +15,7 @@ import {
   TableRow,
 } from '@/components/ui/table';
 import { Locale } from '@/i18n-config';
+import { extractErrorMessage } from '@/lib/extract-error-message';
 import { User, UserRole } from '@/types/user';
 
 import { getColumns } from './columns';
@@ -25,26 +27,10 @@ interface DataTableProps {
   initialErrorMessage?: string | null;
 }
 
-type ErrorResponse = {
-  message?: string | string[];
-};
-
-function extractErrorMessage(payload: ErrorResponse | null, fallback: string): string {
-  if (!payload?.message) {
-    return fallback;
-  }
-
-  return Array.isArray(payload.message) ? payload.message.join(', ') : payload.message;
-}
-
 export function DataTable({ data, dict, locale, initialErrorMessage = null }: DataTableProps) {
-  const [users, setUsers] = React.useState<User[]>(data);
-  const [pendingRoleIds, setPendingRoleIds] = React.useState<number[]>([]);
-  const [errorMessage, setErrorMessage] = React.useState<string | null>(initialErrorMessage);
-
-  useEffect(() => {
-    setErrorMessage(initialErrorMessage);
-  }, [initialErrorMessage]);
+  const [users, setUsers] = useState<User[]>(data);
+  const [pendingRoleIds, setPendingRoleIds] = useState<number[]>([]);
+  const [errorMessage, setErrorMessage] = useState<string | null>(initialErrorMessage);
 
   const handleRoleChange = async (userId: number, nextRole: UserRole) => {
     const previousUser = users.find((user) => user.id === userId);
@@ -69,20 +55,23 @@ export function DataTable({ data, dict, locale, initialErrorMessage = null }: Da
         },
         body: JSON.stringify({ role: nextRole }),
       });
-      const payload = (await response.json().catch(() => null)) as User | ErrorResponse | null;
+      const payload = (await response.json().catch(() => null)) as
+        | User
+        | ErrorMessagePayload
+        | null;
 
       if (!response.ok) {
         throw new Error(
-          extractErrorMessage(payload as ErrorResponse | null, dict.page.failedToUpdateRole),
+          extractErrorMessage(payload as ErrorMessagePayload | null, dict.page.failedToUpdateRole),
         );
       }
 
       const updatedUser = payload as User;
-      React.startTransition(() => {
+      startTransition(() => {
         setUsers((current) => current.map((user) => (user.id === userId ? updatedUser : user)));
       });
     } catch (error) {
-      React.startTransition(() => {
+      startTransition(() => {
         setUsers((current) =>
           current.map((user) => (user.id === userId ? { ...user, role: previousUser.role } : user)),
         );

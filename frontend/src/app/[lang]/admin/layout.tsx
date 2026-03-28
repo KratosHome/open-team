@@ -1,6 +1,7 @@
+import type { ReactNode } from 'react';
+
 import Link from 'next/link';
 import { FileText, LayoutDashboard, LogOut, Settings, Users } from 'lucide-react';
-import React from 'react';
 
 import { Locale } from '@/i18n-config';
 import { getDictionary } from '@/lib/get-dictionary';
@@ -9,7 +10,7 @@ export default async function AdminLayout({
   children,
   params,
 }: {
-  children: React.ReactNode;
+  children: ReactNode;
   params: Promise<{ lang: string }>;
 }) {
   const { lang } = await params;

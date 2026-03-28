@@ -1,8 +1,10 @@
 'use client';
 
+import type { AuthDialogDictionary } from '@/components/auth/auth-dialog';
+
 import Link from 'next/link';
 import { MoveRight } from 'lucide-react';
-import React, { type ComponentProps, useState } from 'react';
+import { useState } from 'react';
 
 import { AuthDialog } from '@/components/auth/auth-dialog';
 import { LanguageSwitcher } from '@/components/language-switcher';
@@ -15,9 +17,9 @@ import { getProjectHref } from '@/config/project-links';
 import { Locale } from '@/i18n-config';
 import { cn } from '@/lib/utils';
 
-type NavbarDictionary = ComponentProps<typeof AuthDialog>['dict'] & {
+interface NavbarDictionary extends AuthDialogDictionary {
   navbar: Record<string, string>;
-};
+}
 
 interface NavbarProps {
   dict: NavbarDictionary;

@@ -2,11 +2,13 @@ import { NextResponse } from 'next/server';
 
 import { getApiBaseUrl } from '@/lib/get-api-base-url';
 
-type RouteContext = {
-  params: Promise<{
-    id: string;
-  }>;
-};
+interface RouteParams {
+  id: string;
+}
+
+interface RouteContext {
+  params: Promise<RouteParams>;
+}
 
 export async function PATCH(request: Request, context: RouteContext) {
   const { id } = await context.params;

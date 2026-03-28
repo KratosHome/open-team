@@ -1,12 +1,12 @@
 'use client';
 
-import { useRef } from 'react';
 import { useGSAP } from '@gsap/react';
-import gsap from 'gsap';
 import { Zap } from 'lucide-react';
+import { useRef } from 'react';
 
 import { Button } from '@/components/ui/button';
 import { ProjectsSectionProps } from '@/types/projects';
+import gsap from 'gsap';
 
 import { ProjectCard } from './ProjectCard';
 
@@ -42,12 +42,12 @@ export function ProjectsSection({ dict, projects }: ProjectsSectionProps) {
         },
       });
     },
-    { scope: containerRef }
+    { scope: containerRef },
   );
 
   return (
     <section ref={containerRef} className="space-y-8 py-16 md:space-y-10 md:py-24">
-      <div className="section-header translate-y-10 opacity-0 will-change-[transform,opacity] flex flex-col gap-4 sm:gap-5 md:flex-row md:items-start md:justify-between">
+      <div className="section-header flex translate-y-10 flex-col gap-4 opacity-0 will-change-[transform,opacity] sm:gap-5 md:flex-row md:items-start md:justify-between">
         <div className="flex items-start gap-3">
           <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#1D4ED8]">
             <Zap className="h-5 w-5 text-white" />
@@ -74,7 +74,10 @@ export function ProjectsSection({ dict, projects }: ProjectsSectionProps) {
 
       <div className="projects-grid grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
         {projects.map((project) => (
-          <div key={project.id} className="project-card-wrapper translate-y-10 opacity-0 will-change-[transform,opacity]">
+          <div
+            key={project.id}
+            className="project-card-wrapper translate-y-10 opacity-0 will-change-[transform,opacity]"
+          >
             <ProjectCard project={project} dict={dict} />
           </div>
         ))}

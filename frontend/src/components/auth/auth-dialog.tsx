@@ -1,7 +1,9 @@
 'use client';
 
+import type { ReactElement } from 'react';
+
 import { ArrowLeft, Lock, Mail, MoveRight, User } from 'lucide-react';
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 
 import { Button } from '@/components/ui/button';
@@ -19,36 +21,40 @@ import { cn } from '@/lib/utils';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
 
-interface AuthDialogProps {
-  trigger?: React.ReactElement;
-  defaultTab?: 'login' | 'register';
-  dict: {
-    auth: {
-      login: string;
-      register: string;
-      welcomeBack: string;
-      loginSubtitle: string;
-      createAccount: string;
-      registerSubtitle: string;
-      forgotPassword: string;
-      forgotPasswordSubtitle: string;
-      backToLogin: string;
-      emailLabel: string;
-      passwordLabel: string;
-      nameLabel: string;
-      namePlaceholder: string;
-      submitLogin: string;
-      submitRegister: string;
-      submitForgot: string;
-      forgotPasswordLink: string;
-      footerText: string;
-      validation: {
-        invalidEmail: string;
-        passwordTooShort: string;
-        nameTooShort: string;
-      };
-    };
+export interface AuthValidationDictionary {
+  invalidEmail: string;
+  passwordTooShort: string;
+  nameTooShort: string;
+}
+
+export interface AuthDialogDictionary {
+  auth: {
+    login: string;
+    register: string;
+    welcomeBack: string;
+    loginSubtitle: string;
+    createAccount: string;
+    registerSubtitle: string;
+    forgotPassword: string;
+    forgotPasswordSubtitle: string;
+    backToLogin: string;
+    emailLabel: string;
+    passwordLabel: string;
+    nameLabel: string;
+    namePlaceholder: string;
+    submitLogin: string;
+    submitRegister: string;
+    submitForgot: string;
+    forgotPasswordLink: string;
+    footerText: string;
+    validation: AuthValidationDictionary;
   };
+}
+
+interface AuthDialogProps {
+  trigger?: ReactElement;
+  defaultTab?: 'login' | 'register';
+  dict: AuthDialogDictionary;
 }
 
 export function AuthDialog({ trigger, defaultTab = 'login', dict }: AuthDialogProps) {
@@ -75,9 +81,20 @@ export function AuthDialog({ trigger, defaultTab = 'login', dict }: AuthDialogPr
     email: z.string().email(dict.auth.validation.invalidEmail),
   });
 
-  type LoginFormValues = z.infer<typeof loginSchema>;
-  type RegisterFormValues = z.infer<typeof registerSchema>;
-  type ForgotPasswordFormValues = z.infer<typeof forgotPasswordSchema>;
+  interface LoginFormValues {
+    email: string;
+    password: string;
+  }
+
+  interface RegisterFormValues {
+    name: string;
+    email: string;
+    password: string;
+  }
+
+  interface ForgotPasswordFormValues {
+    email: string;
+  }
 
   // Forms
   const loginForm = useForm<LoginFormValues>({

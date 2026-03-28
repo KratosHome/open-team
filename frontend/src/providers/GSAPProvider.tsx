@@ -1,12 +1,19 @@
 'use client';
 
-import { ReactNode, useRef } from 'react';
+import type { ReactNode } from 'react';
+
 import { useGSAP } from '@gsap/react';
+import { useRef } from 'react';
+
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Lenis from 'lenis';
 
-export const GSAPProvider = ({ children }: { children: ReactNode }) => {
+interface GSAPProviderProps {
+  children: ReactNode;
+}
+
+export const GSAPProvider = ({ children }: GSAPProviderProps) => {
   const lenisRef = useRef<Lenis | null>(null);
 
   useGSAP(() => {

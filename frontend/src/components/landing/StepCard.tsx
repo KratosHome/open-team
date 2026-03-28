@@ -1,10 +1,12 @@
-import { MyLink } from '@/components/ui/my-link';
-import React from 'react';
+import type { ElementType } from 'react';
+
 import { LucideIcon } from 'lucide-react';
+
+import { MyLink } from '@/components/ui/my-link';
 
 interface StepCardProps {
   number: string;
-  icon: LucideIcon | React.ElementType;
+  icon: LucideIcon | ElementType;
   title: string;
   description: string;
   color: string;
@@ -26,7 +28,7 @@ export const StepCard = ({
     style={{ borderTopColor: color }}
   >
     {/* Glow effect */}
-    <div 
+    <div
       className="absolute -top-4 left-1/2 -z-10 h-32 w-32 -translate-x-1/2 rounded-full opacity-20 blur-[40px] transition-opacity group-hover:opacity-30"
       style={{ backgroundColor: color }}
     />
@@ -39,24 +41,24 @@ export const StepCard = ({
     </div>
 
     <div className="flex w-full flex-col items-center gap-6 text-center">
-      <div 
+      <div
         className="relative flex h-20 w-20 items-center justify-center rounded-2xl transition-transform duration-500 group-hover:scale-110"
-        style={{ 
+        style={{
           backgroundColor: `${color}15`,
-          boxShadow: `0 0 30px ${color}10`
+          boxShadow: `0 0 30px ${color}10`,
         }}
       >
         <Icon className="h-10 w-10 drop-shadow-lg" style={{ color }} />
         {/* Inner glow */}
-        <div 
+        <div
           className="absolute inset-0 rounded-2xl opacity-50 blur-xl"
           style={{ backgroundColor: color }}
         />
       </div>
-      
+
       <div className="flex flex-col gap-3">
         <h3 className="text-2xl font-bold tracking-tight text-white">{title}</h3>
-        <p className="text-sm leading-relaxed text-slate-400 group-hover:text-slate-300 transition-colors">
+        <p className="text-sm leading-relaxed text-slate-400 transition-colors group-hover:text-slate-300">
           {description}
         </p>
         {linkHref && linkLabel ? (

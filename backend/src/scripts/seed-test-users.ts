@@ -7,13 +7,13 @@ import { User } from '../users/entities/user.entity';
 import { ProjectTeamRole } from '../users/enums/project-team-role.enum';
 import { UserRole } from '../users/enums/user-role.enum';
 
-type SeedUser = {
+interface SeedUser {
   name: string;
   email: string;
   password: string;
   role: UserRole;
   projectRoles: ProjectTeamRole[];
-};
+}
 
 const TEST_USERS: SeedUser[] = [
   {

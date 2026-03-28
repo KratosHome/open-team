@@ -11,12 +11,14 @@ import { User } from './entities/user.entity';
 import { ProjectTeamRole } from './enums/project-team-role.enum';
 import { UserRole } from './enums/user-role.enum';
 
-type QueryErrorWithCode = {
+interface DriverErrorWithCode {
   code?: string;
-  driverError?: {
-    code?: string;
-  };
-};
+}
+
+interface QueryErrorWithCode {
+  code?: string;
+  driverError?: DriverErrorWithCode;
+}
 
 @Injectable()
 export class UsersService {

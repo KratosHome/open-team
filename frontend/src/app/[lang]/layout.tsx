@@ -1,18 +1,15 @@
 import type { Metadata, Viewport } from 'next';
+import type { ReactNode } from 'react';
 
 import { Geist_Mono, Inter } from 'next/font/google';
-import { ReactNode } from 'react';
 
 import '../globals.css';
 
 import type { Locale } from '@/i18n-config';
 
 import dynamic from 'next/dynamic';
-import { Navbar } from '@/components/navbar';
 
-const Footer = dynamic(() => import('@/components/footer').then(mod => mod.Footer), {
-  ssr: true,
-});
+import { Navbar } from '@/components/navbar';
 import {
   getAbsoluteProjectUrl,
   getLocaleAlternates,
@@ -20,6 +17,11 @@ import {
 } from '@/config/project-links';
 import { i18n } from '@/i18n-config';
 import { getDictionary } from '@/lib/get-dictionary';
+import { GSAPProvider } from '@/providers/GSAPProvider';
+
+const Footer = dynamic(() => import('@/components/footer').then((mod) => mod.Footer), {
+  ssr: true,
+});
 
 const inter = Inter({
   subsets: ['latin', 'cyrillic'],
@@ -81,8 +83,6 @@ export async function generateMetadata({
     },
   };
 }
-
-import { GSAPProvider } from '@/providers/GSAPProvider';
 
 export default async function RootLayout({
   children,

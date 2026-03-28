@@ -27,12 +27,19 @@ import { Locale } from '@/i18n-config';
 import { cn } from '@/lib/utils';
 import { PROJECT_TEAM_ROLE_VALUES, User, USER_ROLE_VALUES, UserRole } from '@/types/user';
 
-type GetColumnsArgs = {
+interface GetColumnsArgs {
   dict: UsersColumnsDictionary;
   locale: Locale;
   pendingRoleIds: Set<number>;
   onRoleChange: (userId: number, nextRole: UserRole) => void;
-};
+}
+
+interface UserRoleDropdownProps {
+  user: User;
+  dict: UsersColumnsDictionary;
+  isSaving: boolean;
+  onRoleChange: (userId: number, nextRole: UserRole) => void;
+}
 
 const localeByLanguage: Record<Locale, string> = {
   en: 'en-US',
@@ -117,17 +124,7 @@ function getRoleTone(role: UserRole) {
   }
 }
 
-function UserRoleDropdown({
-  user,
-  dict,
-  isSaving,
-  onRoleChange,
-}: {
-  user: User;
-  dict: UsersColumnsDictionary;
-  isSaving: boolean;
-  onRoleChange: (userId: number, nextRole: UserRole) => void;
-}) {
+function UserRoleDropdown({ user, dict, isSaving, onRoleChange }: UserRoleDropdownProps) {
   const roleTone = getRoleTone(user.role);
   const RoleIcon = roleTone.icon;
 

@@ -1,7 +1,6 @@
 'use client';
 
 import { Coins, Lightbulb, MoveRight, Rocket, Zap } from 'lucide-react';
-import React from 'react';
 
 import { Button } from '@/components/ui/button';
 import { HeroSectionProps } from '@/types/hero';
@@ -36,11 +35,17 @@ export const HeroSection = ({ dict, stats }: HeroSectionProps) => {
             </span>
           </h1>
 
-          <p className="hero-description animate-hero-up max-w-lg text-lg leading-relaxed text-white/40" style={{ animationDelay: '400ms' }}>
+          <p
+            className="hero-description animate-hero-up max-w-lg text-lg leading-relaxed text-white/40"
+            style={{ animationDelay: '400ms' }}
+          >
             {dict.heroDescription}
           </p>
 
-          <div className="hero-buttons animate-hero-up flex flex-wrap gap-4" style={{ animationDelay: '600ms' }}>
+          <div
+            className="hero-buttons animate-hero-up flex flex-wrap gap-4"
+            style={{ animationDelay: '600ms' }}
+          >
             <Button variant="success" size="xl">
               {dict.createProject}
               <MoveRight className="transition-transform group-hover/button:translate-x-1" />
@@ -52,14 +57,20 @@ export const HeroSection = ({ dict, stats }: HeroSectionProps) => {
             </Button>
           </div>
 
-          <div className="hero-stats animate-hero-up mt-8 flex flex-wrap gap-4" style={{ animationDelay: '800ms' }}>
+          <div
+            className="hero-stats animate-hero-up mt-8 flex flex-wrap gap-4"
+            style={{ animationDelay: '800ms' }}
+          >
             <StatCard value={stats.activeProjects.toString()} sublabel={dict.stats.projects} />
             <StatCard value={stats.participants.toString()} sublabel={dict.stats.participants} />
             <StatCard value={`${stats.successRate}%`} sublabel={dict.stats.completed} />
           </div>
         </div>
 
-        <div className="hero-steps animate-hero-left relative flex flex-col gap-6 pt-4" style={{ animationDelay: '800ms' }}>
+        <div
+          className="hero-steps animate-hero-left relative flex flex-col gap-6 pt-4"
+          style={{ animationDelay: '800ms' }}
+        >
           <div className="flex justify-start md:justify-end">
             <h2 className="rounded-md bg-[#00ffa2]/10 px-3 py-1 text-[10px] font-bold tracking-[0.2em] text-[#00ffa2] uppercase">
               {dict.howItWorks}

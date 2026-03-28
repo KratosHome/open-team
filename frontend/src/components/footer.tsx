@@ -1,10 +1,12 @@
 'use client';
 
-import React, { useRef } from 'react';
+import type { FooterSectionKey } from '@/config/project-links';
+import type { Locale } from '@/i18n-config';
+
 import Link from 'next/link';
 import { useGSAP } from '@gsap/react';
-import gsap from 'gsap';
-import { Linkedin, Send, Twitter, ArrowRight } from 'lucide-react';
+import { ArrowRight, Linkedin, Send, Twitter } from 'lucide-react';
+import { useRef } from 'react';
 
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -14,9 +16,8 @@ import {
   footerSections,
   getProjectHref,
   socialLinks,
-  type FooterSectionKey,
 } from '@/config/project-links';
-import type { Locale } from '@/i18n-config';
+import gsap from 'gsap';
 
 interface FooterProps {
   dict: {
@@ -49,7 +50,7 @@ interface FooterProps {
   lang: Locale;
 }
 
-export const Footer: React.FC<FooterProps> = ({ dict, lang }) => {
+export function Footer({ dict, lang }: FooterProps) {
   const footerDict = dict.footer;
   const containerRef = useRef<HTMLElement>(null);
 
@@ -111,19 +112,20 @@ export const Footer: React.FC<FooterProps> = ({ dict, lang }) => {
         },
       });
     },
-    { scope: containerRef }
+    { scope: containerRef },
   );
 
   return (
-    <footer ref={containerRef} className="w-full border-t border-white/5 bg-[#020617] pt-16 pb-8 text-gray-400">
+    <footer
+      ref={containerRef}
+      className="w-full border-t border-white/5 bg-[#020617] pt-16 pb-8 text-gray-400"
+    >
       <div className="container mx-auto px-4 lg:px-8">
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:gap-8">
           {/* Logo and Description */}
           <div className="footer-col translate-y-5 opacity-0 will-change-[transform,opacity] lg:col-span-4">
             <Logo size="md" className="mb-6" />
-            <p className="mb-8 max-w-xs text-sm leading-relaxed">
-              {footerDict.description}
-            </p>
+            <p className="mb-8 max-w-xs text-sm leading-relaxed">{footerDict.description}</p>
             <div className="flex gap-3">
               {socialLinks.map((social) => (
                 <Link
@@ -142,7 +144,7 @@ export const Footer: React.FC<FooterProps> = ({ dict, lang }) => {
           </div>
 
           {/* Navigation Columns */}
-          <div className="footer-col translate-y-5 opacity-0 will-change-[transform,opacity] grid grid-cols-2 gap-8 sm:grid-cols-3 lg:col-span-5">
+          <div className="footer-col grid translate-y-5 grid-cols-2 gap-8 opacity-0 will-change-[transform,opacity] sm:grid-cols-3 lg:col-span-5">
             {footerSections.map((column) => (
               <div key={column.titleKey}>
                 <h3 className="mb-6 text-sm font-semibold text-white">
@@ -166,12 +168,8 @@ export const Footer: React.FC<FooterProps> = ({ dict, lang }) => {
 
           {/* Subscription Section */}
           <div className="footer-col translate-y-5 opacity-0 will-change-[transform,opacity] lg:col-span-3">
-            <h3 className="mb-6 text-sm font-semibold text-white">
-              {footerDict.stayInTouch}
-            </h3>
-            <p className="mb-6 text-sm leading-relaxed">
-              {footerDict.subscribeDescription}
-            </p>
+            <h3 className="mb-6 text-sm font-semibold text-white">{footerDict.stayInTouch}</h3>
+            <p className="mb-6 text-sm leading-relaxed">{footerDict.subscribeDescription}</p>
             <div className="flex flex-col gap-3">
               <Input
                 type="email"
@@ -179,8 +177,8 @@ export const Footer: React.FC<FooterProps> = ({ dict, lang }) => {
                 className="h-11 border-white/10 bg-white/5 text-sm ring-offset-[#020617] focus-visible:ring-[#57b9ff]"
                 aria-label={footerDict.emailPlaceholder}
               />
-              <Button 
-                variant="success" 
+              <Button
+                variant="success"
                 className="h-11 w-full justify-between px-4 font-semibold"
                 aria-label={footerDict.subscribe}
               >
@@ -192,10 +190,8 @@ export const Footer: React.FC<FooterProps> = ({ dict, lang }) => {
         </div>
 
         {/* Bottom Bar */}
-        <div className="footer-bottom translate-y-3 opacity-0 will-change-[transform,opacity] mt-16 flex flex-col items-center justify-between gap-6 border-t border-white/5 pt-8 lg:flex-row lg:gap-0">
-          <p className="text-xs">
-            {footerDict.copyright}
-          </p>
+        <div className="footer-bottom mt-16 flex translate-y-3 flex-col items-center justify-between gap-6 border-t border-white/5 pt-8 opacity-0 will-change-[transform,opacity] lg:flex-row lg:gap-0">
+          <p className="text-xs">{footerDict.copyright}</p>
           <div className="flex flex-wrap items-center justify-center gap-6 text-xs">
             {footerLegalLinkKeys.map((linkKey) => (
               <Link
@@ -208,7 +204,7 @@ export const Footer: React.FC<FooterProps> = ({ dict, lang }) => {
             ))}
             <span className="hidden h-1 w-1 rounded-full bg-white/10 lg:block" />
             <div className="flex items-center gap-2 rounded-full bg-[#00e99f]/10 px-3 py-1 text-[#00e99f]">
-              <div className="h-1.5 w-1.5 rounded-full bg-[#00e99f] animate-pulse" />
+              <div className="h-1.5 w-1.5 animate-pulse rounded-full bg-[#00e99f]" />
               <span className="font-semibold tracking-wide">$SECO token</span>
             </div>
           </div>
@@ -216,4 +212,4 @@ export const Footer: React.FC<FooterProps> = ({ dict, lang }) => {
       </div>
     </footer>
   );
-};
+}

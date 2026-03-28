@@ -1,13 +1,14 @@
 'use client';
 
-import { Laptop, Zap, CircleDollarSign, Link2 } from 'lucide-react';
-import React, { useRef } from 'react';
-import { useGSAP } from '@gsap/react';
-import gsap from 'gsap';
-
-import { getProjectHref } from '@/config/project-links';
 import type { Locale } from '@/i18n-config';
 import type { TokenSystemDictionary } from '@/types/token-system';
+
+import { useGSAP } from '@gsap/react';
+import { CircleDollarSign, Laptop, Link2, Zap } from 'lucide-react';
+import { useRef } from 'react';
+
+import { getProjectHref } from '@/config/project-links';
+import gsap from 'gsap';
 
 import { StepCard } from './StepCard';
 
@@ -48,28 +49,26 @@ export const TokenSystemSection = ({ dict, lang }: TokenSystemSectionProps) => {
         },
       });
     },
-    { scope: containerRef }
+    { scope: containerRef },
   );
 
   return (
-    <section ref={containerRef} className="relative py-24 overflow-hidden">
+    <section ref={containerRef} className="relative overflow-hidden py-24">
       {/* Background Decor */}
       <div className="absolute top-0 left-1/4 -z-10 h-[500px] w-[500px] -translate-x-1/2 rounded-full bg-blue-600/5 blur-[120px]" />
-      <div className="absolute bottom-0 right-1/4 -z-10 h-[500px] w-[500px] translate-x-1/2 rounded-full bg-purple-600/5 blur-[120px]" />
+      <div className="absolute right-1/4 bottom-0 -z-10 h-[500px] w-[500px] translate-x-1/2 rounded-full bg-purple-600/5 blur-[120px]" />
 
       <div className="flex flex-col gap-12">
-        <div className="token-header translate-y-8 opacity-0 will-change-[transform,opacity] flex flex-col gap-4">
+        <div className="token-header flex translate-y-8 flex-col gap-4 opacity-0 will-change-[transform,opacity]">
           <div className="flex items-center gap-3">
-            <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-emerald-500/20 text-emerald-500 border border-emerald-500/20">
+            <div className="flex h-12 w-12 items-center justify-center rounded-xl border border-emerald-500/20 bg-emerald-500/20 text-emerald-500">
               <Link2 className="h-6 w-6" />
             </div>
             <h2 className="text-3xl font-bold tracking-tight text-white md:text-5xl">
               {dict.title}
             </h2>
           </div>
-          <p className="max-w-2xl text-lg text-slate-400">
-            {dict.subtitle}
-          </p>
+          <p className="max-w-2xl text-lg text-slate-400">{dict.subtitle}</p>
         </div>
 
         <div className="steps-grid grid grid-cols-1 gap-8 md:grid-cols-3">
